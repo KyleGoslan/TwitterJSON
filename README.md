@@ -46,3 +46,11 @@ Add the following line to your .swift files
 ```Swift
 import TwitterJSON
 ```
+
+## A Little More Info
+
+There are two types of objets you'll mainly instantiate, TJTweets and TJUsers.
+
+Simply put a TJTweets method calls will return and array of TJTweet objects, where as a TJUsers method calls will 
+return and array of TJUser objects. The difference being that if you're asking for an collection of tweets, all tweets inheritably 
+must have a user, but if you were searching for a collection of users, then you wouldn't be expecting back any tweets.  
