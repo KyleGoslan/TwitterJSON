@@ -1,0 +1,6 @@
+framework module Pods_TwitterJSON {
+  umbrella header "Pods-TwitterJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}
