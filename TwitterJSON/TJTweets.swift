@@ -67,6 +67,7 @@ extension TJTweets: TwitterJSONDelegate {
         for item in data {
             let tweet = TJTweet(tweetInfo: item.1)
             tweets.append(tweet)
+            println(tweet.user)
         }
         self.delegate?.gotTweets(tweets)
     }

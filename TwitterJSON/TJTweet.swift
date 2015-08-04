@@ -9,15 +9,26 @@
 import Foundation
 import SwiftyJSON
 
+/**
+A single tweet object.
+
+This also contains a TJUser which contains information about the user who posted the tweet.
+*/
 public class TJTweet {
     
-    //The user who the tweet belongs to
+    /**
+    The user who the tweet belongs to
+    */
     public var user: TJUser!
     
-    //The main body of the tweet
+    /**
+    The main 140 characters text of the tweet
+    */
     public var text: String!
     
-    //How many times the tweet has been favorited
+    /**
+    How many times the tweet has been favorited
+    */
     public var favoriteCount: Int!
     
     init(tweetInfo: JSON) {
