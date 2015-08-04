@@ -42,9 +42,8 @@ with the most recent tweet.
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
-
-CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds supports 
+for Swift and embedded frameworks. You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
@@ -68,13 +67,13 @@ $ pod install
 
 ## Requirements
 
-- iOS 8.0+
+- iOS 8.0+c
 - Xcode 6.4
 
 ## A Little More Info
 
-There are two types of objets you'll mainly instantiate, TJTweets and TJUsers.
+There are two types of objets you'll mainly instantiate, `TJTweets` and `TJUsers`.
 
-Simply put a TJTweets method calls will return and array of TJTweet objects, where as a TJUsers method calls will 
-return and array of TJUser objects. The difference being that if you're asking for an collection of tweets, all tweets inheritably 
+Simply put a `TJTweets` method calls will return and array of `TJTweet` objects, where as a `TJUsers` method calls will 
+return and array of `TJUser` objects. The difference being that if you're asking for an collection of tweets, all tweets inheritably 
 must have a user, but if you were searching for a collection of users, then you wouldn't be expecting back any tweets.  
