@@ -14,7 +14,7 @@ You can start getting responses in just a few lines of code.
     tjTweets.delegate = self
 ``` 
 
-##### You can now ask from a responce from the api with simple method calls
+##### You can now ask from a response from the api with simple method calls
 
 ```swift
 	tjTweets.getTimelineForUser("KyleGoslan")
