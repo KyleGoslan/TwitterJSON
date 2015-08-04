@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [Unreleased][unreleased]
 
 ## [0.1.2](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.1)
 Released on 2015-08-04.
