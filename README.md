@@ -34,16 +34,13 @@ extension ViewController: TJTweetDelegate {
 ```
 
 The result from the above example would create a log message containing the tweet and the users screen 
-name who published the tweet. By default the method call will return the 20 most recent tweets starting 
-with the most recent tweet.
-
+name who published the tweet. By default the method call will return the 20 most recent tweets.
 
 ## Installation
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds supports 
-for Swift and embedded frameworks. You can install it with the following command:
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
@@ -74,36 +71,36 @@ started with the TwitterJSON Framework you need to set up a Twitter app here:
 Complete the form and under the 'Keys and Access Tokens' tab you'll find the two keys you need to
 get started with the TwitterJSON library. 
 
-*Consumer Key (API Key)
-*Consumer Secret (API Secret)
+* Consumer Key (API Key)
+* Consumer Secret (API Secret)
 
 ## Getting Tweets
 
-To get tweets you'll instanciate a new TJTweets object, passing in the two api keys documented above.
+To get tweets you'll instanciate a new `TJTweets` object, passing in the two api keys documented above:
 
 ```swift
     var tjTweets = TJTweets(apiKey: "xxx", apiSecret: "xxx")
 ```
 
-Set the delegate of the new TJTweets object.
+Set the delegate of the new `TJTweets` object:
 
 ```swift 
     tjTweets.delegate = self 
 ```
 
-Set the delegate in the class (probably a view controller) that you're working in eg.
+Set the delegate in the class (probably a view controller) that you're working in eg:
 
 ```swift
     class ViewController: UIViewController, TJTweetDelegate {
 ```
 
-Call the helper method to return the tweets you want, for example
+Call the helper method to return the tweets you want, for example:
 
 ```swift 
     tjTweets.getTimelineForUser("KyleGoslan")
 ```
 
-Finally, implement the delegate method. This method receives an array (20 by default) of `TJTweet` objects. These each represent a tweet. 
+Finally, implement the delegate method. This method receives an array (20 by default) of `TJTweet` objects. These each represent a tweet:
 
 ```swift
     func gotTweets(tweets: [TJTweet]) {
