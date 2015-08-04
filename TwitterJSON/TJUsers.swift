@@ -34,7 +34,7 @@ public class TJUsers {
     
     :param: String Screen name of the users whos favorites to retrieve.
     */
-    func getFollowersForUser(screenName: String) {
+    public func getFollowersForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/followers/list.json?screen_name=" + screenName
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken)
