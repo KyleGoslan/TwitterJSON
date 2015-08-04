@@ -5,7 +5,7 @@ You can start getting responses in just a few lines of code.
 
 ## Example
 
-#### Set up your TJTweets object with your api and api secret keys from twitter and set the objects delegate
+##### Set up your TJTweets object with your api and api secret keys from twitter and set the objects delegate
 
 ```swift
 	let apiKey = "123456789"
@@ -14,13 +14,13 @@ You can start getting responses in just a few lines of code.
     tjTweets.delegate = self
 ``` 
 
-#### You can now ask from a responce from the api with simple method calls
+##### You can now ask from a responce from the api with simple method calls
 
 ```swift
 	tjTweets.getTimelineForUser("KyleGoslan")
 ```
 
-#### Conform to the TJTweetDelegate protocol 
+##### Conform to the TJTweetDelegate protocol 
 
 ```swift
 extension ViewController: TJTweetDelegate {
@@ -31,7 +31,7 @@ extension ViewController: TJTweetDelegate {
         }
     }
 }
-
+```
 
 ## Installation
 
