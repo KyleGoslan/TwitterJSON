@@ -26,26 +26,50 @@ You can start getting responses in just a few lines of code.
 extension ViewController: TJTweetDelegate {
     func gotTweets(tweets: [TJTweet]) {
         for tweet in tweets {
-            println(tweet.user.screenName)
             println(tweet.text)
+            println(tweet.user.screenName)
         }
     }
 }
 ```
 
+The result from the above example would create a log message containing the tweet and the users screen 
+name who published the tweet. By default the method call will return the 20 most recent tweets starting 
+with the most recent tweet.
+
+
 ## Installation
 
-### [CocoaPods](http://cocoapods.org)
+### CocoaPods
 
-Add the following line to your Podfile
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
+
+CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+
 ```bash
+$ gem install cocoapods
+```
+
+To integrate TwitterJSON into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
 pod 'TwitterJSON'
 ```
 
-Add the following line to your .swift files
-```Swift
-import TwitterJSON
+Then, run the following command:
+
+```bash
+$ pod install
 ```
+
+## Requirements
+
+- iOS 8.0+
+- Xcode 6.4
 
 ## A Little More Info
 
