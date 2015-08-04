@@ -13,6 +13,7 @@ public class TJTweet {
     
     public var user: TJUser!
     public var text: String!
+    public var favoriteCount: Int!
     
     init(tweetInfo: JSON) {
         
@@ -22,6 +23,10 @@ public class TJTweet {
         
         if let text = tweetInfo["text"].string {
             self.text = text
+        }
+        
+        if let favoriteCount = tweetInfo["favorite_count"].int {
+            self.favoriteCount = favoriteCount
         }
         
     }

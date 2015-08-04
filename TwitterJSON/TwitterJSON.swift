@@ -16,12 +16,12 @@ public protocol TwitterJSONDelegate {
 
 public class TwitterJSON {
     
-    public let apiKey: String!
-    public let apiSecret: String!
+    private let apiKey: String!
+    private let apiSecret: String!
     
     public var delegate: TwitterJSONDelegate?
     
-    public init(apiKey: String, apiSecret: String) {
+    init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey
         self.apiSecret = apiSecret
     }
@@ -56,13 +56,6 @@ public class TwitterJSON {
                     var json = JSON(json!)
                     self.delegate?.gotdata(json)
                 }
-        }
-    }
-    
-    public func getTimeline(screenName: String) {
-        getBearerToken { (bearerToken) -> Void in
-            let apiURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + screenName
-            self.performDataRequestForURL(apiURL, bearerToken: bearerToken)
         }
     }
     

@@ -36,19 +36,18 @@ public class TJTweets {
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken)
         }
     }
-
+    
 }
 
 extension TJTweets: TwitterJSONDelegate {
+    
     public func gotdata(data: JSON) {
-        
         var tweets = [TJTweet]()
-        
         for item in data {
             let tweet = TJTweet(tweetInfo: item.1)
             tweets.append(tweet)
         }
-        
         self.delegate?.gotTweets(tweets)
     }
+    
 }
