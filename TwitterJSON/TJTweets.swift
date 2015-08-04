@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TJTweetDelegate {
+public protocol TJTweetsDelegate {
     /**
     Delegate method which contains an array of TJTweet objets
     
@@ -25,7 +25,7 @@ When methods are called they return an array of TJTweet objects to the delegate 
 public class TJTweets {
     
     private let twitterJSON: TwitterJSON!
-    public var delegate: TJTweetDelegate?
+    public var delegate: TJTweetsDelegate?
     
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
