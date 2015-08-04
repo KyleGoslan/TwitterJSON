@@ -29,10 +29,10 @@ public class TJUsers {
     }
     
     /**
-    Gets the most recent favorited tweets of the user specified in the parameter. Once the results are retrieved
-    they are passed to the delegate method as an array of TJTweet objects.
+    Gets the most recent followers of the user specified in teh parameter. Once the reults are retrieved they are 
+    passed to the delegate method as an array of TJUser objects.
     
-    :param: String Screen name of the users whos favorites to retrieve.
+    :param: String Screen name of the users whos followers to retrieve.
     */
     public func getFollowersForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -47,11 +47,10 @@ extension TJUsers: TwitterJSONDelegate {
     
     public func gotdata(data: JSON) {
         var users = [TJUser]()
-        println(data)
-//        for item in data {
-//            let user = TJUser(userInfo: item.1)
-//            users.append(user)
-//        }
+        for item in data["users"] {
+            let user = TJUser(userInfo: item.1)
+            users.append(user)
+        }
         self.delegate?.gotUsers(users)
     }
     
