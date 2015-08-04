@@ -1,6 +1,6 @@
 # TwitterJSON
 
-TwitterJSON makes it very easy to get up and running with Twitter REST api on iOS devices. 
+TwitterJSON makes it very easy to get up and running with the Twitter REST api on iOS devices. 
 You can start getting responses in just a few lines of code.
 
 ## Example
@@ -14,7 +14,7 @@ You can start getting responses in just a few lines of code.
     tjTweets.delegate = self
 ``` 
 
-##### You can now ask from a response from the api with simple method calls
+##### You can now ask for a response with simple method calls
 
 ```swift
 	tjTweets.getTimelineForUser("KyleGoslan")
@@ -26,7 +26,7 @@ You can start getting responses in just a few lines of code.
 extension ViewController: TJTweetDelegate {
     func gotTweets(tweets: [TJTweet]) {
         for tweet in tweets {
-            println(tweet.user)
+            println(tweet.user.screenName)
             println(tweet.text)
         }
     }
