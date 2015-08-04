@@ -12,7 +12,7 @@ import XCTest
 class TJTweetTest: XCTestCase {
 
     func testCanInit() {
-        var tweetJSON = TJTweet(apiKey: "xxx", apiSecret: "xxx")
+        var tweetJSON = TJTweets(apiKey: "xxx", apiSecret: "xxx")
         XCTAssertEqual(tweetJSON.twitterJSON.apiKey, "xxx")
         XCTAssertEqual(tweetJSON.twitterJSON.apiKey, "xxx")
     }

@@ -11,17 +11,19 @@ import SwiftyJSON
 
 public class TJTweet {
     
-    public let twitterJSON: TwitterJSON!
+    public var user: TJUser!
+    public var text: String!
     
-    public init(apiKey: String, apiSecret: String) {
-        self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
-        self.twitterJSON.delegate = self
-    }
-
-}
-
-extension TJTweet: TwitterJSONDelegate {
-    public func gotdata(data: JSON) {
+    init(tweetInfo: JSON) {
+        
+        if let user = tweetInfo["user"].dictionary {
+            self.user = TJUser(userInfo: tweetInfo["user"])
+        }
+        
+        if let text = tweetInfo["text"].string {
+            self.text = text
+        }
         
     }
+    
 }
