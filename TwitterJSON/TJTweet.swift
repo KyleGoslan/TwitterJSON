@@ -11,8 +11,13 @@ import SwiftyJSON
 
 public class TJTweet {
     
+    //The user who the tweet belongs to
     public var user: TJUser!
+    
+    //The main body of the tweet
     public var text: String!
+    
+    //How many times the tweet has been favorited
     public var favoriteCount: Int!
     
     init(tweetInfo: JSON) {

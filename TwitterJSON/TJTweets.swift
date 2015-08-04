@@ -10,12 +10,21 @@ import Foundation
 import SwiftyJSON
 
 public protocol TJTweetDelegate {
+    /**
+    Delegate method which contains an array of TJTweet objets
+    
+    :param: Array Collection of TJTweet objets.
+    */
     func gotTweets(tweets:[TJTweet])
 }
 
+/**
+Object that deals with sending requets to the Twitter api to do with retrieving Tweets.
+When methods are called they return an array of TJTweet objects to the delegate method.
+*/
 public class TJTweets {
     
-    public let twitterJSON: TwitterJSON!
+    private let twitterJSON: TwitterJSON!
     public var delegate: TJTweetDelegate?
     
     public init(apiKey: String, apiSecret: String) {
@@ -27,7 +36,7 @@ public class TJTweets {
     Gets the most recent tweets of the user specified in the parameter. Once the results are retrieved
     they are passed to the delegate method as an array of TJTweet objects.
     
-    :param: The screen name of the users whos timeline to retrieve.
+    :param: String Screen name of the users whos timeline to retrieve.
     */
     public func getTimelineForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -40,7 +49,7 @@ public class TJTweets {
     Gets the most recent favorited tweets of the user specified in the parameter. Once the results are retrieved
     they are passed to the delegate method as an array of TJTweet objects.
     
-    :param: The screen name of the users whos favorites to retrieve.
+    :param: String Screen name of the users whos favorites to retrieve.
     */
     public func getFavorites(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
