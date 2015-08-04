@@ -23,6 +23,12 @@ public class TJTweets {
         self.twitterJSON.delegate = self
     }
     
+    /**
+    Gets the most recent tweets of the user specified in the parameter. Once the results are retrieved
+    they are passed to the delegate method as an array of TJTweet objects.
+    
+    :param: The screen name of the users whos timeline to retrieve.
+    */
     public func getTimelineForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + screenName
@@ -30,6 +36,12 @@ public class TJTweets {
         }
     }
     
+    /**
+    Gets the most recent favorited tweets of the user specified in the parameter. Once the results are retrieved
+    they are passed to the delegate method as an array of TJTweet objects.
+    
+    :param: The screen name of the users whos favorites to retrieve.
+    */
     public func getFavorites(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/favorites/list.json?screen_name=" + screenName

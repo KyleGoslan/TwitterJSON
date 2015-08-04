@@ -40,7 +40,7 @@ name who published the tweet. By default the method call will return the 20 most
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds   supports for Swift and embedded frameworks. You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
@@ -91,7 +91,7 @@ Set the delegate of the new `TJTweets` object:
 Set the delegate in the class (probably a view controller) that you're working in eg:
 
 ```swift
-    class ViewController: UIViewController, TJTweetDelegate {
+    extension ViewController: TJTweetDelegate {
 ```
 
 Call the helper method to return the tweets you want, for example:
