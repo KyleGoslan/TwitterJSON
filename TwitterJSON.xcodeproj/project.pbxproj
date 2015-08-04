@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2777D5801B705156003EF2FF /* TwitterJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FA62321B70370400467C8A /* TwitterJSON.swift */; };
+		2777D5821B70CF2A003EF2FF /* TJUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777D5811B70CF2A003EF2FF /* TJUtils.swift */; };
+		27AC43431B70D2950078CF0F /* TJUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777D5811B70CF2A003EF2FF /* TJUtils.swift */; };
+		27AC43451B70E92F0078CF0F /* TJTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43441B70E92F0078CF0F /* TJTweet.swift */; };
+		27AC43481B70E96E0078CF0F /* TJTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43441B70E92F0078CF0F /* TJTweet.swift */; };
+		27AC434A1B70F55C0078CF0F /* TJTweetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43491B70F55C0078CF0F /* TJTweetTest.swift */; };
 		27FA621C1B70358000467C8A /* TwitterJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FA621B1B70358000467C8A /* TwitterJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27FA62221B70358000467C8A /* TwitterJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FA62161B70358000467C8A /* TwitterJSON.framework */; };
 		27FA62291B70358000467C8A /* TwitterJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FA62281B70358000467C8A /* TwitterJSONTests.swift */; };
@@ -25,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2777D5811B70CF2A003EF2FF /* TJUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJUtils.swift; sourceTree = "<group>"; };
+		27AC43441B70E92F0078CF0F /* TJTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJTweet.swift; sourceTree = "<group>"; };
+		27AC43491B70F55C0078CF0F /* TJTweetTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJTweetTest.swift; sourceTree = "<group>"; };
 		27FA62161B70358000467C8A /* TwitterJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TwitterJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FA621A1B70358000467C8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27FA621B1B70358000467C8A /* TwitterJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterJSON.h; sourceTree = "<group>"; };
@@ -82,6 +91,8 @@
 			children = (
 				27FA621B1B70358000467C8A /* TwitterJSON.h */,
 				27FA62321B70370400467C8A /* TwitterJSON.swift */,
+				27AC43441B70E92F0078CF0F /* TJTweet.swift */,
+				2777D5811B70CF2A003EF2FF /* TJUtils.swift */,
 				27FA62191B70358000467C8A /* Supporting Files */,
 			);
 			path = TwitterJSON;
@@ -98,6 +109,7 @@
 		27FA62251B70358000467C8A /* TwitterJSONTests */ = {
 			isa = PBXGroup;
 			children = (
+				27AC43491B70F55C0078CF0F /* TJTweetTest.swift */,
 				27FA62281B70358000467C8A /* TwitterJSONTests.swift */,
 				27FA62261B70358000467C8A /* Supporting Files */,
 			);
@@ -271,7 +283,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27AC43451B70E92F0078CF0F /* TJTweet.swift in Sources */,
 				27FA62331B70370400467C8A /* TwitterJSON.swift in Sources */,
+				2777D5821B70CF2A003EF2FF /* TJUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +294,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				27FA62291B70358000467C8A /* TwitterJSONTests.swift in Sources */,
+				27AC43431B70D2950078CF0F /* TJUtils.swift in Sources */,
+				27AC434A1B70F55C0078CF0F /* TJTweetTest.swift in Sources */,
+				27AC43481B70E96E0078CF0F /* TJTweet.swift in Sources */,
+				2777D5801B705156003EF2FF /* TwitterJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
