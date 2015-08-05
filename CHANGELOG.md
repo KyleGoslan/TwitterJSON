@@ -6,7 +6,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [0.1.5](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.4)
+Released on 2015-08-05.
+
+#### Added
+- Added TJUsers `getFollowingForUser(screenName: String, completion: (users: [TJUser]) -> Void) {..}` method.
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+- Added TJUsers `getFollowingForUser(screenName: String, completion: (users: [TJUser]) -> Void) {..}` method.
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+- Added TJTweets `func getTweetsForList(listSlug: String, fromUser user: String, completion: (tweets: [TJTweet]) -> Void) {...}` method.
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+- Added a number of tests.
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+
 ## [0.1.4](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.4)
+Released on 2015-08-05.
+
+#### Changed
 - Removed the TwitterJSON protocol methods so this class no longer has a delegate. Date is now returned in a completion handler.
     - Changed by [Kyle Goslan](https://github.com/KyleGoslan).
 - TJTweets & TJUsers objects no longer have delegate methods. Uses completion handlers instead, which makes the library even easier to implement and use.
