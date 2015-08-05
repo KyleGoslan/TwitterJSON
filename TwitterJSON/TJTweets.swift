@@ -32,6 +32,7 @@ public class TJTweets {
     they are passed to the delegate method as an array of TJTweet objects.
     
     :param: String Screen name of the users whos timeline to retrieve.
+    :param: completion The code to be executed once the request has finished.
     */
     public func getTimelineForUser(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -52,6 +53,7 @@ public class TJTweets {
     passed into the completion handler.
     
     :param: String Screen name of the users whos favorites to retrieve.
+    :param: completion The code to be executed once the request has finished.
     */
     public func getFavorites(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -72,6 +74,7 @@ public class TJTweets {
     into the completion handler.
     
     :param: String Search term
+    :param: completion The code to be executed once the request has finished.
     */
     public func searchForTweets(searchQuery: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -79,6 +82,28 @@ public class TJTweets {
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
                 var tweets = [TJTweet]()
                 for item in data["statuses"] {
+                    let tweet = TJTweet(tweetInfo: item.1)
+                    tweets.append(tweet)
+                }
+                completion(tweets: tweets)
+            })
+        }
+    }
+    
+    /**
+    //Get the most recent tweets containing the given search term. An array of TJTweet objects are passed
+    into the completion handler.
+    
+    :param: String Search term
+    :param: completion The code to be executed once the request has finished.
+    */
+    public func getTweetsForList(listSlug: String, fromUser user: String, completion: (tweets: [TJTweet]) -> Void) {
+        twitterJSON.getBearerToken { (bearerToken) -> Void in
+            let query = "slug=" + listSlug.urlEncode() + "&owner_screen_name=" + user.urlEncode() + "&count=20"
+            let apiURL = "https://api.twitter.com/1.1/lists/statuses.json?" + query
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+                var tweets = [TJTweet]()
+                for item in data {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
