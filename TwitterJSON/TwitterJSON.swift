@@ -10,18 +10,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-public protocol TwitterJSONDelegate {
-    func gotdata(data: JSON)
-}
-
 public class TwitterJSON {
     
-    private let apiKey: String!
-    private let apiSecret: String!
+    public let apiKey: String!
+    public let apiSecret: String!
     
-    public var delegate: TwitterJSONDelegate?
-    
-    init(apiKey: String, apiSecret: String) {
+    public init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey
         self.apiSecret = apiSecret
     }
@@ -45,7 +39,7 @@ public class TwitterJSON {
         }
     }
     
-    public func performDataRequestForURL(apiURL: String, bearerToken: String) {
+    public func performDataRequestForURL(apiURL: String, bearerToken: String, completion: (data: JSON) -> Void) {
         var dataRequest = NSMutableURLRequest(URL: NSURL(string:apiURL)!)
         dataRequest.HTTPMethod = "GET"
         dataRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
@@ -54,7 +48,7 @@ public class TwitterJSON {
             .responseJSON { request, response, json, error in
                 if error == nil {
                     var json = JSON(json!)
-                    self.delegate?.gotdata(json)
+                    completion(data: json)
                 }
         }
     }

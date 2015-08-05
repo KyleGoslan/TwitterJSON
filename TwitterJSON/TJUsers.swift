@@ -37,7 +37,9 @@ public class TJUsers {
     public func getFollowersForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/followers/list.json?screen_name=" + screenName
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken)
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+            
+            })
         }
     }
 

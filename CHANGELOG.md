@@ -4,7 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 #### Changed
+- Removed the TwitterJSON protocol methods so this class no longer has a delegate. Date is now returned in a completion handler.
+    - Changed by [Kyle Goslan](https://github.com/KyleGoslan).
+    
 #### Added
+- Added 100% test coverage for the TwitterJSON class.
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
 
 ## [0.1.3](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.3)
 Released on 2015-08-04.

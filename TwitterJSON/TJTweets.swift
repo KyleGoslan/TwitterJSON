@@ -29,7 +29,6 @@ public class TJTweets {
     
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
-        self.twitterJSON.delegate = self
     }
     
     /**
@@ -41,7 +40,15 @@ public class TJTweets {
     public func getTimelineForUser(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + screenName
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken)
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+                var tweets = [TJTweet]()
+                for item in data {
+                    let tweet = TJTweet(tweetInfo: item.1)
+                    tweets.append(tweet)
+                    println(tweet.user)
+                }
+                self.delegate?.gotTweets(tweets)
+            })
         }
     }
     
@@ -54,22 +61,16 @@ public class TJTweets {
     public func getFavorites(screenName: String) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/favorites/list.json?screen_name=" + screenName
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken)
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+                var tweets = [TJTweet]()
+                for item in data {
+                    let tweet = TJTweet(tweetInfo: item.1)
+                    tweets.append(tweet)
+                    println(tweet.user)
+                }
+                self.delegate?.gotTweets(tweets)
+            })
         }
-    }
-    
-}
-
-extension TJTweets: TwitterJSONDelegate {
-    
-    public func gotdata(data: JSON) {
-        var tweets = [TJTweet]()
-        for item in data {
-            let tweet = TJTweet(tweetInfo: item.1)
-            tweets.append(tweet)
-            println(tweet.user)
-        }
-        self.delegate?.gotTweets(tweets)
     }
     
 }
