@@ -60,6 +60,38 @@ class TJTweetsTest: XCTestCase {
         })
     }
     
+    func testSearchForTweets() {
+        let expectation = expectationWithDescription("Get User Favorites")
+        tj!.getFavorites(user!, completion: { tweets in
+            for tweet in tweets {
+                XCTAssertNotNil(tweet.text)
+                XCTAssertNotNil(tweet.user)
+                XCTAssertNotNil(tweet.favoriteCount)
+            }
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
+    func testGetTweetsForList() {
+        let expectation = expectationWithDescription("Get User Favorites")
+        tj!.getTweetsForList("great-ios-developers", fromUser: "JoeBlackwell", completion: { tweets in
+            for tweet in tweets {
+                XCTAssertNotNil(tweet.text)
+                XCTAssertNotNil(tweet.user)
+                XCTAssertNotNil(tweet.favoriteCount)
+            }
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
     
     
 }

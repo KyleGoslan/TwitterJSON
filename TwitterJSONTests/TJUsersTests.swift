@@ -40,5 +40,18 @@ class TJUsersTests: XCTestCase {
             XCTAssertNil(error, "Error")
         })
     }
+    
+    func testGetFollowingForUser() {
+        let expectation = expectationWithDescription("Get Users")
+        tj?.getFollowingForUser(user!, completion: { users in
+            for user in users {
+                XCTAssertNotNil(user.name)
+            }
+            expectation.fulfill()
+        })
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
 
 }
