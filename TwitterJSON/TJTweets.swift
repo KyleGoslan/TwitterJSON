@@ -9,15 +9,6 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TJTweetsDelegate {
-    /**
-    Delegate method which contains an array of TJTweet objets
-    
-    :param: Array Collection of TJTweet objets.
-    */
-    func gotTweets(tweets:[TJTweet])
-}
-
 /**
 Object that deals with sending requets to the Twitter api to do with retrieving Tweets.
 When methods are called they return an array of TJTweet objects to the delegate method.
@@ -25,7 +16,6 @@ When methods are called they return an array of TJTweet objects to the delegate 
 public class TJTweets {
     
     private let twitterJSON: TwitterJSON!
-    public var delegate: TJTweetsDelegate?
     
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
@@ -37,7 +27,7 @@ public class TJTweets {
     
     :param: String Screen name of the users whos timeline to retrieve.
     */
-    public func getTimelineForUser(screenName: String) {
+    public func getTimelineForUser(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + screenName
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
@@ -45,9 +35,8 @@ public class TJTweets {
                 for item in data {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
-                    println(tweet.user)
                 }
-                self.delegate?.gotTweets(tweets)
+                completion(tweets: tweets)
             })
         }
     }
@@ -58,7 +47,7 @@ public class TJTweets {
     
     :param: String Screen name of the users whos favorites to retrieve.
     */
-    public func getFavorites(screenName: String) {
+    public func getFavorites(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/favorites/list.json?screen_name=" + screenName
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
@@ -66,9 +55,8 @@ public class TJTweets {
                 for item in data {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
-                    println(tweet.user)
                 }
-                self.delegate?.gotTweets(tweets)
+                completion(tweets: tweets)
             })
         }
     }

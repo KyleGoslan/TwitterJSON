@@ -66,7 +66,6 @@ public class TJUser {
         }
         
         if let hasProfileImage = userInfo["default_profile_image"].bool {
-            println(hasProfileImage)
             if hasProfileImage {
                 self.hasProfileImage = true
                 
