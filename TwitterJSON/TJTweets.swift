@@ -48,8 +48,8 @@ public class TJTweets {
     }
     
     /**
-    Gets the most recent favorited tweets of the user specified in the parameter. Once the results are retrieved
-    they are passed to the delegate method as an array of TJTweet objects.
+    Gets the most recent favorited tweets of the user specified in the parameter. An Array of TJTweet objects are
+    passed into the completion handler.
     
     :param: String Screen name of the users whos favorites to retrieve.
     */
@@ -59,6 +59,26 @@ public class TJTweets {
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
                 var tweets = [TJTweet]()
                 for item in data {
+                    let tweet = TJTweet(tweetInfo: item.1)
+                    tweets.append(tweet)
+                }
+                completion(tweets: tweets)
+            })
+        }
+    }
+    
+    /**
+    //Get the most recent tweets containing the given search term. An array of TJTweet objects are passed
+    into the completion handler.
+    
+    :param: String Search term
+    */
+    public func searchForTweets(searchQuery: String, completion: (tweets: [TJTweet]) -> Void) {
+        twitterJSON.getBearerToken { (bearerToken) -> Void in
+            let apiURL = "https://api.twitter.com/1.1/search/tweets.json?q=" + searchQuery.urlEncode()
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+                var tweets = [TJTweet]()
+                for item in data["statuses"] {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
