@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+/**
+A single user object.
+
+Contains information related to a single user.
+*/
 public class TJUser {
     
     /**
@@ -46,7 +51,11 @@ public class TJUser {
     */
     public var profileImage: UIImage!
 
-    
+    /**
+    Initilize with a json object.
+
+    The init method parses the json and sets the objets properties.
+    */
     init(userInfo: JSON) {
         
         if let user = userInfo["name"].string {
@@ -96,6 +105,5 @@ public class TJUser {
             completion(data: data)
             }.resume()
     }
-    
     
 }

@@ -8,11 +8,6 @@
 
 import Foundation
 
-public enum TJType {
-    case User
-    case Tweet
-}
-
 extension String {
     
     func urlEncode() -> (String) {

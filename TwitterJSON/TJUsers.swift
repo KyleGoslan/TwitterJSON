@@ -9,10 +9,20 @@
 import Foundation
 import SwiftyJSON
 
+/**
+Object that deals with sending requets to the Twitter api to do with retrieving lists of users.
+When methods are called they return an array of TJUser objects to the completion handler.
+*/
 public class TJUsers {
     
+    /**
+    Object that performs the final network requests.
+    */
     public let twitterJSON: TwitterJSON!
     
+    /**
+    Initialize with api and api secret keys from Twitter.
+    */
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
     }

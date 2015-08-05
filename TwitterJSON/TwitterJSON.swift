@@ -10,16 +10,37 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+/**
+All the real network requests are sent through this object.
+
+Uses the Alamofire library.
+*/
 public class TwitterJSON {
     
+    /**
+    Api key from Twitter.
+    */
     public let apiKey: String!
+    
+    /**
+    Api secret key from Twitter.
+    */
     public let apiSecret: String!
     
+    /**
+    Initialize with api and api secret keys from Twitter.
+    */
     public init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey
         self.apiSecret = apiSecret
     }
+
+    /**
+    Combines and encrypts the api key and the secret key and exchanges them for 
+    a bearer token via a network request.
     
+    :param: completion The code to be executed once the request has finished.
+    */
     public func getBearerToken(completion: (bearerToken: String) -> Void) {
         let bearerTokenCredentials = apiKey! + ":" + apiSecret!
         let bearerTokenCredentialsData = (bearerTokenCredentials as NSString).dataUsingEncoding(NSUTF8StringEncoding)
@@ -39,6 +60,13 @@ public class TwitterJSON {
         }
     }
     
+    /**
+    Performs the network request to retrieve the json data from twitter.
+    
+    :param: String The complete REST api url
+    :param: String A valid bearer token
+    :param: completion The code to be executed once the request has finished.
+    */
     public func performDataRequestForURL(apiURL: String, bearerToken: String, completion: (data: JSON) -> Void) {
         var dataRequest = NSMutableURLRequest(URL: NSURL(string:apiURL)!)
         dataRequest.HTTPMethod = "GET"

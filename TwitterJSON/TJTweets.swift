@@ -11,12 +11,18 @@ import SwiftyJSON
 
 /**
 Object that deals with sending requets to the Twitter api to do with retrieving Tweets.
-When methods are called they return an array of TJTweet objects to the delegate method.
+When methods are called they return an array of TJTweet objects to the completion handler.
 */
 public class TJTweets {
     
+    /**
+    Object that performs the final network requests.
+    */
     public let twitterJSON: TwitterJSON!
     
+    /**
+    Initialize with api and api secret keys from twitter.
+    */
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
     }
