@@ -28,14 +28,36 @@ public class TJUsers {
     }
     
     /**
-    Gets the most recent followers of the user specified in teh parameter. Once the reults are retrieved they are 
+    Gets the most recent followers of the user specified in the parameter. Once the reults are retrieved they are
     passed to the delegate method as an array of TJUser objects.
     
     :param: String Screen name of the users whos followers to retrieve.
+    :param: Completion The code to be executed once the request has finished.
     */
     public func getFollowersForUser(screenName: String, completion: (users: [TJUser]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
             let apiURL = "https://api.twitter.com/1.1/followers/list.json?screen_name=" + screenName
+            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+                var users = [TJUser]()
+                for item in data["users"] {
+                    let user = TJUser(userInfo: item.1)
+                    users.append(user)
+                }
+                completion(users: users)
+            })
+        }
+    }
+    
+    /**
+    Gets the most recent followers of the user specified in the parameter. Once the reults are retrieved they are
+    passed to the delegate method as an array of TJUser objects.
+    
+    :param: String Screen name of the users whos followers to retrieve.
+    :param: Completion The code to be executed once the request has finished.
+    */
+    public func getFollowingForUser(screenName: String, completion: (users: [TJUser]) -> Void) {
+        twitterJSON.getBearerToken { (bearerToken) -> Void in
+            let apiURL = "https://api.twitter.com/1.1/friends/list.json?screen_name=" + screenName
             self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
                 var users = [TJUser]()
                 for item in data["users"] {

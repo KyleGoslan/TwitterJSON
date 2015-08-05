@@ -53,7 +53,7 @@ public class TJTweets {
     passed into the completion handler.
     
     :param: String Screen name of the users whos favorites to retrieve.
-    :param: completion The code to be executed once the request has finished.
+    :param: Completion The code to be executed once the request has finished.
     */
     public func getFavorites(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -74,7 +74,7 @@ public class TJTweets {
     into the completion handler.
     
     :param: String Search term
-    :param: completion The code to be executed once the request has finished.
+    :param: Completion The code to be executed once the request has finished.
     */
     public func searchForTweets(searchQuery: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
@@ -95,7 +95,7 @@ public class TJTweets {
     into the completion handler.
     
     :param: String Search term
-    :param: completion The code to be executed once the request has finished.
+    :param: Completion The code to be executed once the request has finished.
     */
     public func getTweetsForList(listSlug: String, fromUser user: String, completion: (tweets: [TJTweet]) -> Void) {
         twitterJSON.getBearerToken { (bearerToken) -> Void in
