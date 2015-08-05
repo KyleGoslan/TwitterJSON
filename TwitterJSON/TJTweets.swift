@@ -15,7 +15,7 @@ When methods are called they return an array of TJTweet objects to the delegate 
 */
 public class TJTweets {
     
-    private let twitterJSON: TwitterJSON!
+    public let twitterJSON: TwitterJSON!
     
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)

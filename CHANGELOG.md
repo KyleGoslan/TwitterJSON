@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 #### Changed
+#### Added
+
+## [0.1.4](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.4)
 - Removed the TwitterJSON protocol methods so this class no longer has a delegate. Date is now returned in a completion handler.
     - Changed by [Kyle Goslan](https://github.com/KyleGoslan).
 - TJTweets & TJUsers objects no longer have delegate methods. Uses completion handlers instead, which makes the library even easier to implement and use.
@@ -12,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Added
 - Completion handlers rather than delegate methods.
     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
-- Added 100% test coverage for the TwitterJSON class.
+- Added tests.
     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
 
 ## [0.1.3](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.3)

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public class TJUsers {
     
-    private let twitterJSON: TwitterJSON!
+    public let twitterJSON: TwitterJSON!
     
     public init(apiKey: String, apiSecret: String) {
         self.twitterJSON = TwitterJSON(apiKey: apiKey, apiSecret: apiSecret)
