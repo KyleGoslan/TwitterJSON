@@ -23,7 +23,7 @@ class TwitterJSONTests: XCTestCase {
         tj = TwitterJSON(apiKey: apiKey!, apiSecret: apiSecret!)
     }
     
-    func testExample() {
+    func testAPIKeyValues() {
         XCTAssertEqual(tj!.apiKey, apiKey!)
         XCTAssertEqual(tj!.apiSecret, apiSecret!)
     }
