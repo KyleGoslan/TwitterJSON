@@ -28,8 +28,8 @@ public class TJUsers {
     }
     
     /**
-    Gets the most recent followers of the user specified in the parameter. Once the reults are retrieved they are
-    passed to the delegate method as an array of TJUser objects.
+    Gets the most recent followers of the user specified in the parameter. An array of TJUser objects are
+    passed into the completion handler.
     
     :param: String Screen name of the users whos followers to retrieve.
     :param: Completion The code to be executed once the request has finished.
@@ -49,8 +49,8 @@ public class TJUsers {
     }
     
     /**
-    Gets the most recent followers of the user specified in the parameter. Once the reults are retrieved they are
-    passed to the delegate method as an array of TJUser objects.
+    Gets the most recent followers of the user specified in the parameter. An array of TJUser objects are
+    passed into the completion handler.
     
     :param: String Screen name of the users whos followers to retrieve.
     :param: Completion The code to be executed once the request has finished.

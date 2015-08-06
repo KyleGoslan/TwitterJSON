@@ -28,8 +28,8 @@ public class TJTweets {
     }
     
     /**
-    Gets the most recent tweets of the user specified in the parameter. Once the results are retrieved
-    they are passed to the delegate method as an array of TJTweet objects.
+    Gets the most recent tweets of the user specified in the parameter. An array of TJTweet objects are
+    passed into the completion handler.
     
     :param: String Screen name of the users whos timeline to retrieve.
     :param: completion The code to be executed once the request has finished.
@@ -49,7 +49,7 @@ public class TJTweets {
     }
     
     /**
-    Gets the most recent favorited tweets of the user specified in the parameter. An Array of TJTweet objects are
+    Gets the most recent favorited tweets of the user specified in the parameter. An array of TJTweet objects are
     passed into the completion handler.
     
     :param: String Screen name of the users whos favorites to retrieve.

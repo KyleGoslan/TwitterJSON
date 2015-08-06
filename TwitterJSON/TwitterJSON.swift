@@ -11,14 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 /**
-All protocol methods are optional
-*/
-@objc public protocol TwitterJSONDelegate {
-    optional func requestResponse(response: NSHTTPURLResponse?, error: NSError?)
-    optional func rawJSON(json: AnyObject?)
-}
-
-/**
 All the real network requests are sent through this object.
 
 Uses the Alamofire library.
@@ -34,11 +26,6 @@ public class TwitterJSON {
     Api secret key from Twitter.
     */
     public let apiSecret: String!
-    
-    /**
-    Optional delegate for dealing with bad network response
-    */
-    public var delegate: TwitterJSONDelegate?
     
     /**
     Initialize with api and api secret keys from Twitter.
@@ -64,18 +51,11 @@ public class TwitterJSON {
         loginRequest.addValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         loginRequest.addValue("text/plain", forHTTPHeaderField: "content-type")
         
-        Alamofire.request(loginRequest)
-            .responseJSON { request, response, json, error in
-                
-                if let delegate = self.delegate {
-                    delegate.requestResponse?(response, error: error)
-                    delegate.rawJSON?(json)
-                }
-                
-                if error == nil {
-                    var json = JSON(json!)
-                    completion(bearerToken: json["access_token"].stringValue)
-                }
+        Alamofire.request(loginRequest).responseJSON { request, response, json, error in
+            if error == nil {
+                var json = JSON(json!)
+                completion(bearerToken: json["access_token"].stringValue)
+            }
         }
     }
     
@@ -91,12 +71,11 @@ public class TwitterJSON {
         dataRequest.HTTPMethod = "GET"
         dataRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
         
-        Alamofire.request(dataRequest)
-            .responseJSON { request, response, json, error in
-                if error == nil {
-                    var json = JSON(json!)
-                    completion(data: json)
-                }
+        Alamofire.request(dataRequest).responseJSON { request, response, json, error in
+            if error == nil {
+                var json = JSON(json!)
+                completion(data: json)
+            }
         }
     }
     
