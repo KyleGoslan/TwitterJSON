@@ -24,7 +24,7 @@ public class TJUser {
     /**
     The screen name of the user
     */
-    public var screenName: String?
+    public var screenName: String!
     
     /**
     User bio/description
