@@ -28,30 +28,35 @@ class TJUsersTests: XCTestCase {
         XCTAssertEqual(tj!.twitterJSON.apiSecret, apiSecret!)
     }
     
-//    func testGetFollowersForUser() {
-//        let expectation = expectationWithDescription("Get Users")
-//        tj?.getFollowersForUser(user!, completion: { users in
-//            for user in users {
-//                XCTAssertNotNil(user.name)
-//            }
-//            expectation.fulfill()
-//        })
-//        waitForExpectationsWithTimeout(5, handler: { error in
-//            XCTAssertNil(error, "Error")
-//        })
-//    }
+    func testGetFollowersForUser() {
+        let expectation = expectationWithDescription("Get Users")
+        tj?.getFollowersForUser("KyleGoslan", completion: { (users, error) -> Void in
+            if let users = users {
+                for user in users {
+                    XCTAssertNotNil(user.name)
+                }
+            }
+            expectation.fulfill()
+        })
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
     
-//    func testGetFollowingForUser() {
-//        let expectation = expectationWithDescription("Get Users")
-//        tj?.getFollowingForUser(user!, completion: { users in
-//            for user in users {
-//                XCTAssertNotNil(user.name)
-//            }
-//            expectation.fulfill()
-//        })
-//        waitForExpectationsWithTimeout(5, handler: { error in
-//            XCTAssertNil(error, "Error")
-//        })
-//    }
+    func testGetFollowingForUser() {
+        let expectation = expectationWithDescription("Get Users")
+        tj?.getFollowersForUser("KyleGoslan", completion: { (users, error) -> Void in
+            if let users = users {
+                for user in users {
+                    XCTAssertNotNil(user.name)
+                }
+            }
+            expectation.fulfill()
+        })
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
 
 }

@@ -93,7 +93,7 @@ public class TwitterJSON {
                                 completion(data: json, error: error)
                             }
                         } else {
-                            completion(data: nil, error: nil)
+                            completion(data: nil, error: error)
                         }
                     }
                 }

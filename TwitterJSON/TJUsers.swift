@@ -57,18 +57,20 @@ public class TJUsers {
     :param: String Screen name of the users whos followers to retrieve.
     :param: Completion The code to be executed once the request has finished.
     */
-//    public func getFollowingForUser(screenName: String, completion: (users: [TJUser]) -> Void) {
-//        twitterJSON.getBearerToken { (bearerToken) -> Void in
-//            let apiURL = "https://api.twitter.com/1.1/friends/list.json?screen_name=" + screenName
-//            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
-//                var users = [TJUser]()
-//                for item in data["users"] {
-//                    let user = TJUser(userInfo: item.1)
-//                    users.append(user)
-//                }
-//                completion(users: users)
-//            })
-//        }
-//    }
+    public func getFollowingForUser(screenName: String, completion: (users: [TJUser]?, error: NSError?) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/friends/list.json?screen_name=" + screenName
+        twitterJSON.performDataRequestForURL(apiURL, completion: { (data, error) -> Void in
+            if error == nil {
+                var users = [TJUser]()
+                for item in data!["users"] {
+                    let user = TJUser(userInfo: item.1)
+                    users.append(user)
+                }
+                completion(users: users, error: nil)
+            } else {
+                completion(users: nil, error: error)
+            }
+        })
+    }
 
 }

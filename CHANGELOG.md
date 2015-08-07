@@ -6,8 +6,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [0.2.0](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.0)
+Released on 2015-08-05.
 
-## [0.1.5](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.4)
+#### Added
+- Added error handling for all API method calls. See documentation. 
+     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+
+## [0.1.5](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.1.5)
 Released on 2015-08-05.
 
 #### Added
