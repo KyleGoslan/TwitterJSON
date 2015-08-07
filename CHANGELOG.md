@@ -6,8 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [0.2.1](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.1)
+Released on 2015-08-07.
+
+#### Changed
+- Fixed bug in searchForTweets method that resulted in no errors being returned when there should be.
+    - Changed by [Kyle Goslan](https://github.com/KyleGoslan).
+
 ## [0.2.0](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.0)
-Released on 2015-08-05.
+Released on 2015-08-07.
 
 #### Added
 - Added error handling for all API method calls. See documentation. 

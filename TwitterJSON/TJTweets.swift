@@ -91,7 +91,7 @@ public class TJTweets {
                 }
                 completion(tweets: tweets, error: nil)
             } else {
-            
+                completion(tweets: nil, error: error)
             }
         })
     }
