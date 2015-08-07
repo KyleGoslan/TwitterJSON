@@ -34,18 +34,20 @@ public class TJTweets {
     :param: String Screen name of the users whos timeline to retrieve.
     :param: completion The code to be executed once the request has finished.
     */
-    public func getTimelineForUser(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
-        twitterJSON.getBearerToken { (bearerToken) -> Void in
+    public func getTimelineForUser(screenName: String, completion: (tweets: [TJTweet]?, error: NSError?) -> Void) {
             let apiURL = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + screenName
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+        twitterJSON.performDataRequestForURL(apiURL, completion: { (data, error) -> Void in
+            if error == nil {
                 var tweets = [TJTweet]()
-                for item in data {
+                for item in data! {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets)
-            })
-        }
+                completion(tweets: tweets, error: nil)
+            } else {
+                completion(tweets: nil, error: error)
+            }
+        })
     }
     
     /**
@@ -55,18 +57,20 @@ public class TJTweets {
     :param: String Screen name of the users whos favorites to retrieve.
     :param: Completion The code to be executed once the request has finished.
     */
-    public func getFavorites(screenName: String, completion: (tweets: [TJTweet]) -> Void) {
-        twitterJSON.getBearerToken { (bearerToken) -> Void in
-            let apiURL = "https://api.twitter.com/1.1/favorites/list.json?screen_name=" + screenName
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+    public func getFavorites(screenName: String, completion: (tweets: [TJTweet]?, error: NSError?) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/favorites/list.json?screen_name=" + screenName
+        twitterJSON.performDataRequestForURL(apiURL, completion: { (data, error) -> Void in
+            if error == nil {
                 var tweets = [TJTweet]()
-                for item in data {
+                for item in data! {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets)
-            })
-        }
+                completion(tweets: tweets, error: nil)
+            } else {
+                completion(tweets: nil, error: error)
+            }
+        })
     }
     
     /**
@@ -76,18 +80,20 @@ public class TJTweets {
     :param: String Search term
     :param: Completion The code to be executed once the request has finished.
     */
-    public func searchForTweets(searchQuery: String, completion: (tweets: [TJTweet]) -> Void) {
-        twitterJSON.getBearerToken { (bearerToken) -> Void in
-            let apiURL = "https://api.twitter.com/1.1/search/tweets.json?q=" + searchQuery.urlEncode()
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+    public func searchForTweets(searchQuery: String, completion: (tweets: [TJTweet]?, error: NSError?) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/search/tweets.json?q=" + searchQuery.urlEncode()
+        twitterJSON.performDataRequestForURL(apiURL, completion: { (data, error) -> Void in
+            if error == nil {
                 var tweets = [TJTweet]()
-                for item in data["statuses"] {
+                for item in data!["statuses"] {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets)
-            })
-        }
+                completion(tweets: tweets, error: nil)
+            } else {
+            
+            }
+        })
     }
     
     /**
@@ -97,19 +103,21 @@ public class TJTweets {
     :param: String Search term
     :param: Completion The code to be executed once the request has finished.
     */
-    public func getTweetsForList(listSlug: String, fromUser user: String, completion: (tweets: [TJTweet]) -> Void) {
-        twitterJSON.getBearerToken { (bearerToken) -> Void in
-            let query = "slug=" + listSlug.urlEncode() + "&owner_screen_name=" + user.urlEncode() + "&count=20"
-            let apiURL = "https://api.twitter.com/1.1/lists/statuses.json?" + query
-            self.twitterJSON.performDataRequestForURL(apiURL, bearerToken: bearerToken, completion: { data in
+    public func getTweetsForList(listSlug: String, fromUser user: String, completion: (tweets: [TJTweet]?, error: NSError?) -> Void) {
+        let query = "slug=" + listSlug.urlEncode() + "&owner_screen_name=" + user.urlEncode() + "&count=20"
+        let apiURL = "https://api.twitter.com/1.1/lists/statuses.json?" + query
+        twitterJSON.performDataRequestForURL(apiURL, completion: { (data, error) -> Void in
+            if error == nil {
                 var tweets = [TJTweet]()
-                for item in data {
+                for item in data! {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets)
-            })
-        }
+                completion(tweets: tweets, error: nil)
+            } else {
+                completion(tweets: nil, error: error)
+            }
+        })
     }
     
 }

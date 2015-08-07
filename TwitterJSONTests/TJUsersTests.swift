@@ -30,9 +30,11 @@ class TJUsersTests: XCTestCase {
     
     func testGetFollowersForUser() {
         let expectation = expectationWithDescription("Get Users")
-        tj?.getFollowersForUser(user!, completion: { users in
-            for user in users {
-                XCTAssertNotNil(user.name)
+        tj?.getFollowersForUser("KyleGoslan", completion: { (users, error) -> Void in
+            if let users = users {
+                for user in users {
+                    XCTAssertNotNil(user.name)
+                }
             }
             expectation.fulfill()
         })
@@ -43,9 +45,11 @@ class TJUsersTests: XCTestCase {
     
     func testGetFollowingForUser() {
         let expectation = expectationWithDescription("Get Users")
-        tj?.getFollowingForUser(user!, completion: { users in
-            for user in users {
-                XCTAssertNotNil(user.name)
+        tj?.getFollowersForUser("KyleGoslan", completion: { (users, error) -> Void in
+            if let users = users {
+                for user in users {
+                    XCTAssertNotNil(user.name)
+                }
             }
             expectation.fulfill()
         })
@@ -53,5 +57,6 @@ class TJUsersTests: XCTestCase {
             XCTAssertNil(error, "Error")
         })
     }
+    
 
 }

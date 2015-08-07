@@ -28,10 +28,10 @@ class TJTweetsTest: XCTestCase {
         XCTAssertEqual(tj!.twitterJSON.apiSecret, apiSecret!)
     }
     
-    func testgetTimelineForUser() {
+    func testGetTimelineForUser() {
         let expectation = expectationWithDescription("Get User Timeline")
-        tj!.getTimelineForUser(user!, completion: { tweets in
-            for tweet in tweets {
+        tj!.getTimelineForUser("KyleGoslan", completion: { (tweets, error) -> Void in
+            for tweet in tweets! {
                 XCTAssertNotNil(tweet.text)
                 XCTAssertNotNil(tweet.user)
                 XCTAssertNotNil(tweet.favoriteCount)
@@ -46,8 +46,8 @@ class TJTweetsTest: XCTestCase {
     
     func testgetFavoritesForUser() {
         let expectation = expectationWithDescription("Get User Favorites")
-        tj!.getFavorites(user!, completion: { tweets in
-            for tweet in tweets {
+        tj!.getFavorites("KyleGoslan", completion: { (tweets, error) -> Void in
+            for tweet in tweets! {
                 XCTAssertNotNil(tweet.text)
                 XCTAssertNotNil(tweet.user)
                 XCTAssertNotNil(tweet.favoriteCount)
@@ -62,8 +62,8 @@ class TJTweetsTest: XCTestCase {
     
     func testSearchForTweets() {
         let expectation = expectationWithDescription("Get User Favorites")
-        tj!.getFavorites(user!, completion: { tweets in
-            for tweet in tweets {
+        tj!.searchForTweets("Apple", completion: { (tweets, error) -> Void in
+            for tweet in tweets! {
                 XCTAssertNotNil(tweet.text)
                 XCTAssertNotNil(tweet.user)
                 XCTAssertNotNil(tweet.favoriteCount)
@@ -78,8 +78,8 @@ class TJTweetsTest: XCTestCase {
     
     func testGetTweetsForList() {
         let expectation = expectationWithDescription("Get User Favorites")
-        tj!.getTweetsForList("great-ios-developers", fromUser: "JoeBlackwell", completion: { tweets in
-            for tweet in tweets {
+        tj!.getTweetsForList("great-ios-developers", fromUser: "JoeBlackwell", completion: { (tweets, error) -> Void in
+            for tweet in tweets! {
                 XCTAssertNotNil(tweet.text)
                 XCTAssertNotNil(tweet.user)
                 XCTAssertNotNil(tweet.favoriteCount)
