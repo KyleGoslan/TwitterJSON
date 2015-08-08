@@ -102,5 +102,27 @@ public class TwitterJSON {
             }
         }
     }
-
+    
+    public func printRateLimit() {
+        getBearerToken { (bearerToken, error) -> Void in
+            if error == nil {
+                if let bearerToken = bearerToken {
+                    let apiURL = "https://api.twitter.com/1.1/application/rate_limit_status.json"
+                    var dataRequest = NSMutableURLRequest(URL: NSURL(string:apiURL)!)
+                    dataRequest.HTTPMethod = "GET"
+                    dataRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+                    Alamofire.request(dataRequest).responseJSON { request, response, json, error in
+                        if error == nil {
+                            var json = JSON(json!)
+                            println(json)
+                        } else {
+                            println("Couldn't get rate limit.")
+                        }
+                    }
+                }
+            } else {
+                println("Couldn't get rate limit.")
+            }
+        }
+    }
 }

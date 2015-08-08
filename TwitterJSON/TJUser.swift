@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 import SwiftyJSON
 
 /**
@@ -75,35 +76,19 @@ public class TJUser {
         if let followersCount = userInfo["followers_count"].int {
             self.followersCount = followersCount
         }
-        
-        if let hasProfileImage = userInfo["default_profile_image"].bool {
-            if hasProfileImage {
-                self.hasProfileImage = true
-                
-                if let profileImageURL = userInfo["profile_image_url"].string {
-                    self.profileImageURL = profileImageURL
-                }
-                
-                if let checkedUrl = NSURL(string: profileImageURL) {
-                    downloadImage(checkedUrl)
-                }
-            }
+    
+        if let profileImageURL = userInfo["profile_image_url"].string {
+            self.profileImageURL = profileImageURL
         }
-        
+
     }
     
-    func downloadImage(url:NSURL){
-        getDataFromUrl(url) { data in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.profileImage = UIImage(data: data!)
-            }
+    public func loadImage(imageView: UIImageView)  {
+        Alamofire.request(.GET, profileImageURL).response { (request, response, data, error) in
+            self.profileImage = UIImage(data: data!, scale:1)
+            imageView.image = self.profileImage
         }
     }
     
-    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: data)
-            }.resume()
-    }
     
 }
