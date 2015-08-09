@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [0.2.2](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.2)
+Released on 2015-08-09.
+
+#### Added
+- All TJUser objects now have the users profile image autmatically downloaded and ready to use. 
+     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+- You can now print your twitter apps rate limit to check your useage. 
+     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+- Number of properties to TJUser objects.
+     - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+
+
 ## [0.2.1](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.1)
 Released on 2015-08-07.
 

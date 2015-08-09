@@ -6,7 +6,7 @@ s.name = "TwitterJSON"
 s.summary = "Simple integration with Twitter RESE api."
 s.requires_arc = true
 
-s.version = "0.2.1"
+s.version = "0.2.2"
 s.license = { :type => "MIT", :file => "LICENSE" }
 s.author = { "Kyle Goslan" => "kylegoslan@me.com" }
 s.social_media_url = 'https://twitter.com/kylegoslan'

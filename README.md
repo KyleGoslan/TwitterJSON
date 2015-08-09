@@ -113,6 +113,19 @@ Call the helper method to return the users you want, for example:
     })
 ```
 
+## Images 
+    
+All TJUser objects come with the users profile image already downloaded. The download request is performed asynchronously whenever you do any request and is comepleted before the objects are returned, so are ready to use straight away in the completion block. Example:
+
+```swift 
+    tjTweets.searchForTweets("weekend" , completion: { tweets, error in
+        self.myImageView.image = tweets[0].user.profileImage
+    })
+```
+Remembering to use `self` to access instance properties inside closures ;) 
+
+The decision to include profile images by defualt was taken because they are probably the most used images. Doing it this way makes your view update instantly as soon as the callback is recieved while the data consumption is still incredibly small. Typically a request containing 20 tweets is ~20kb of data. 
+
 ## Error Handling
 
 Every method that you call to retrive data from Twitter has an optional `NSError` object with it. If the API request was successful then this will be `nil`. 

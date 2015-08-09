@@ -51,7 +51,23 @@ public class TJUser {
     If the user has a profile image this will load the image into a UIImage
     */
     public var profileImage: UIImage!
-
+    
+    /**
+    Profile banner image Url
+    */
+    public var profileBannerURL: String!
+    
+    /**
+    How many people the user is followiung
+    */
+    public var followingCount: Int!
+    
+    /**
+    Total number of tweets by the user
+    */
+    public var totalTweets: Int!
+    
+    
     /**
     Initilize with a json object.
 
@@ -80,7 +96,25 @@ public class TJUser {
         if let profileImageURL = userInfo["profile_image_url"].string {
             self.profileImageURL = profileImageURL
         }
-
+        
+        if let profileBannerURL = userInfo["profile_banner_url"].string {
+            self.profileBannerURL = profileBannerURL
+        }
+        
+        if let followingCount = userInfo["frinds_count"].int {
+            self.followingCount = followingCount
+        }
+        
+        if let totalTweets = userInfo["statuses_count"].int {
+            self.totalTweets = totalTweets
+        }
+        
     }
-    
+
 }
+
+
+
+
+
+

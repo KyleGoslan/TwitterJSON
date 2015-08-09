@@ -39,7 +39,7 @@ public class TwitterJSON {
     Combines and encrypts the api key and the secret key and exchanges them for 
     a bearer token via a network request.
     
-    :param: completion The code to be executed once the request has finished.
+    :param: completion The code to be executed once the request has finished
     */
     public func getBearerToken(completion: (bearerToken: String?, error: NSError?) -> Void) {
         let bearerTokenCredentials = apiKey! + ":" + apiSecret!
@@ -72,7 +72,7 @@ public class TwitterJSON {
     
     :param: String The complete REST api url
     :param: String A valid bearer token
-    :param: completion The code to be executed once the request has finished.
+    :param: completion The code to be executed once the request has finished
     */
     public func performDataRequestForURL(apiURL: String, completion: (data: JSON?, error: NSError?) -> Void) {
         getBearerToken { (bearerToken, error) -> Void in
@@ -103,9 +103,15 @@ public class TwitterJSON {
         }
     }
     
+    /**
+    Downloads all the user profile images for TJUser objects
+    
+    :param: Array Optional array of TJTweet objects
+    :param: Array Optional array of TJUser objects
+    :param: Completion Code to execuse on completion of the downloads
+    */
     public func loadImages(tweets: [TJTweet]?, users: [TJUser]?, completion: (tweets: [TJTweet]?, users: [TJUser]?) -> Void) {
         var i = 0
-        
         if let tweets = tweets {
             for tweet in tweets {
                 Alamofire.request(.GET, tweet.user.profileImageURL).response { (request, response, data, error) in
@@ -117,7 +123,6 @@ public class TwitterJSON {
                 }
             }
         }
-        
         if let users = users {
             for user in users {
                 Alamofire.request(.GET, user.profileImageURL).response { (request, response, data, error) in
@@ -131,6 +136,9 @@ public class TwitterJSON {
         }
     }
     
+    /**
+    Print out the apps data rate limit statistics from Twitter. Prints as pure JSON.
+    */
     public func printRateLimit() {
         getBearerToken { (bearerToken, error) -> Void in
             if error == nil {
