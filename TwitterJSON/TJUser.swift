@@ -83,12 +83,4 @@ public class TJUser {
 
     }
     
-    public func loadImage(imageView: UIImageView)  {
-        Alamofire.request(.GET, profileImageURL).response { (request, response, data, error) in
-            self.profileImage = UIImage(data: data!, scale:1)
-            imageView.image = self.profileImage
-        }
-    }
-    
-    
 }

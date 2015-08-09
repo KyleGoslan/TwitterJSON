@@ -43,7 +43,9 @@ public class TJTweets {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets, error: nil)
+                self.twitterJSON.loadImages(tweets, users: nil, completion: { tweets, _ in
+                    completion(tweets: tweets, error: nil)
+                })
             } else {
                 completion(tweets: nil, error: error)
             }
@@ -66,7 +68,9 @@ public class TJTweets {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets, error: nil)
+                self.twitterJSON.loadImages(tweets, users: nil, completion: { tweets, _ in
+                    completion(tweets: tweets, error: nil)
+                })
             } else {
                 completion(tweets: nil, error: error)
             }
@@ -89,7 +93,9 @@ public class TJTweets {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets, error: nil)
+                self.twitterJSON.loadImages(tweets, users: nil, completion: { tweets, _ in
+                    completion(tweets: tweets, error: nil)
+                })
             } else {
                 completion(tweets: nil, error: error)
             }
@@ -113,7 +119,9 @@ public class TJTweets {
                     let tweet = TJTweet(tweetInfo: item.1)
                     tweets.append(tweet)
                 }
-                completion(tweets: tweets, error: nil)
+                self.twitterJSON.loadImages(tweets, users: nil, completion: { tweets, _ in
+                    completion(tweets: tweets, error: nil)
+                })
             } else {
                 completion(tweets: nil, error: error)
             }

@@ -43,7 +43,9 @@ public class TJUsers {
                     let user = TJUser(userInfo: item.1)
                     users.append(user)
                 }
-                completion(users: users, error: nil)
+                self.twitterJSON.loadImages(nil, users: users, completion: { _, users in
+                    completion(users: users, error: nil)
+                })
             } else {
                 completion(users: nil, error: error)
             }
@@ -66,7 +68,9 @@ public class TJUsers {
                     let user = TJUser(userInfo: item.1)
                     users.append(user)
                 }
-                completion(users: users, error: nil)
+                self.twitterJSON.loadImages(nil, users: users, completion: { _, users in
+                    completion(users: users, error: nil)
+                })
             } else {
                 completion(users: nil, error: error)
             }
