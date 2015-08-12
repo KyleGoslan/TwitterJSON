@@ -32,6 +32,26 @@ public class TJTweet {
     public var favoriteCount: Int!
     
     /**
+    How many times the tweet has been retweeted
+    */
+    public var retweetCount: Int!
+    
+    /**
+    Array of hashtags in the tweet
+    */
+    public var hashtags: [String] = []
+    
+    /**
+    Array of urls in the tweet
+    */
+    public var urls: [String] = []
+    
+    /**
+    Array of users mentioned in the tweet
+    */
+    public var userMentions: [String] = []
+    
+    /**
     Initilize with a json object.
     
     The init method parses the json and sets the objets properties.
@@ -50,6 +70,35 @@ public class TJTweet {
             self.favoriteCount = favoriteCount
         }
         
+        if let retweetCount = tweetInfo["retweet_count"].int {
+            self.retweetCount = retweetCount
+        }
+        
+        if let hashtags = tweetInfo["entities","hashtags"].array {
+            for tag in hashtags {
+                self.hashtags.append(tag["text"].string!)
+            }
+        }
+        
+        if let urls = tweetInfo["entities","urls"].array {
+            for url in urls {
+                self.urls.append(url["expanded_url"].string!)
+            }
+        }
+        
+        if let userMentions = tweetInfo["entities","user_mentions"].array {
+            for mention in userMentions {
+                self.userMentions.append(mention["screen_name"].string!)
+            }
+        }
+
     }
     
 }
+
+
+
+
+
+
+
