@@ -6,6 +6,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [0.2.3](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.3)
+Released on 2015-12-09.
+
+#### Added
+- Expanded the TJTweet class to incude more properties.
+    * retweet count
+    * hashtags
+    * urls
+    * user mentions
+    - Added by [Kyle Goslan](https://github.com/KyleGoslan).
+
 ## [0.2.2](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.2)
 Released on 2015-08-09.
 
