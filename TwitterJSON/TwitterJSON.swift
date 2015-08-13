@@ -34,6 +34,19 @@ public class TwitterJSON {
         self.apiKey = apiKey
         self.apiSecret = apiSecret
     }
+    
+    class public func loadImage(imageURL: String?, intoView imageView: UIImageView, completion: ((error: NSError?) -> Void)?) {
+        if let imageURL = imageURL {
+            Alamofire.request(.GET, imageURL).response { request, response, data, error in
+                if error == nil {
+                    imageView.image = UIImage(data: data!, scale: 1)
+                    completion?(error: nil)
+                } else {
+                    completion?(error: error)
+                }
+            }
+        }
+    }
 
     /**
     Combines and encrypts the api key and the secret key and exchanges them for 
