@@ -16,7 +16,7 @@ All the real network requests are sent through this object.
 */
 public class TwitterJSON {
     
-    public static var numberOfTweets = 25
+    public static var numberOfResults = 20
     
     /**
     Search for tweets.
@@ -28,7 +28,7 @@ public class TwitterJSON {
         let apiURL = "https://api.twitter.com/1.1/search/tweets.json"
         let parameters = [
             "q" : query,
-            "count": "\(TwitterJSON.numberOfTweets)"
+            "count": "\(TwitterJSON.numberOfResults)"
         ]
         TwitterJSON.makeRequest(.GET, parameters: parameters, apiURL: apiURL) { success, json in
             var tweets = [TJTweet]()
@@ -49,7 +49,10 @@ public class TwitterJSON {
     */
     public class func getHomeFeed(completion: (tweets: [TJTweet]) -> Void) {
         let apiURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        TwitterJSON.makeRequest(.GET, parameters: nil, apiURL: apiURL) { success, json in
+        let parameters = [
+            "count": "\(TwitterJSON.numberOfResults)"
+        ]
+        TwitterJSON.makeRequest(.GET, parameters: parameters, apiURL: apiURL) { success, json in
             var tweets = [TJTweet]()
             for item in json {
                 let tweet = TJTweet(tweetInfo: item.1)
@@ -57,6 +60,30 @@ public class TwitterJSON {
             }
             dispatch_async(dispatch_get_main_queue(),{
                 completion(tweets: tweets)
+            })
+        }
+    }
+    
+    /**
+    Get the followers for the given user
+    
+    :param: String Username of the user whos followers to retrive.
+    :param: Completion Containts an array of TJTweet objects.
+    */
+    public class func getFollowersForUser(userName: String, completion: (users: [TJUser]) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/followers/list.json"
+        let parameters = [
+            "screen_name": userName,
+            "count": "\(TwitterJSON.numberOfResults)"
+        ]
+        TwitterJSON.makeRequest(.GET, parameters: parameters, apiURL: apiURL) { success, json in
+            var users = [TJUser]()
+            for item in json["users"] {
+                let user = TJUser(userInfo: item.1)
+                users.append(user)
+            }
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(users: users)
             })
         }
     }

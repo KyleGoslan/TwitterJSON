@@ -14,14 +14,14 @@ import SwiftyJSON
 class TwitterJSONTests: XCTestCase {
     
     override func setUp() {
-        TwitterJSON.numberOfTweets = 5
+        TwitterJSON.numberOfResults = 10
     }
     
     func testGetHomeFeed() {
         let expectation = expectationWithDescription("Test Get Home Feed")
         
         TwitterJSON.getHomeFeed { (tweets) -> Void in
-            XCTAssertEqual(tweets.count, 20)
+            XCTAssertEqual(tweets.count, TwitterJSON.numberOfResults)
             expectation.fulfill()
         }
         
@@ -60,9 +60,22 @@ class TwitterJSONTests: XCTestCase {
         let expectation = expectationWithDescription("Test Search Tweets")
         
         TwitterJSON.searchForTweets("Apple") { (tweets) -> Void in
-            XCTAssertEqual(tweets.count, TwitterJSON.numberOfTweets)
+            XCTAssertEqual(tweets.count, TwitterJSON.numberOfResults)
             expectation.fulfill()
         }
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
+    func testGetUserFollowers() {
+        let expectation = expectationWithDescription("Test User Followers")
+        
+        TwitterJSON.getFollowersForUser("KyleGoslan", completion: { (users) -> Void in
+            XCTAssertEqual(users.count, TwitterJSON.numberOfResults)
+            expectation.fulfill()
+        })
         
         waitForExpectationsWithTimeout(5, handler: { error in
             XCTAssertNil(error, "Error")
