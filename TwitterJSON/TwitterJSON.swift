@@ -16,6 +16,8 @@ All the real network requests are sent through this object.
 */
 public class TwitterJSON {
     
+    public static var numberOfTweets = 25
+    
     /**
     Search for tweets.
     
@@ -26,6 +28,7 @@ public class TwitterJSON {
         let apiURL = "https://api.twitter.com/1.1/search/tweets.json"
         let parameters = [
             "q" : query,
+            "count": "\(TwitterJSON.numberOfTweets)"
         ]
         TwitterJSON.makeRequest(.GET, parameters: parameters, apiURL: apiURL) { success, json in
             var tweets = [TJTweet]()

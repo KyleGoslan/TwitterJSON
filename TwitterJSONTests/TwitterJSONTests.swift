@@ -14,7 +14,7 @@ import SwiftyJSON
 class TwitterJSONTests: XCTestCase {
     
     override func setUp() {
-
+        TwitterJSON.numberOfTweets = 5
     }
     
     func testGetHomeFeed() {
@@ -59,10 +59,10 @@ class TwitterJSONTests: XCTestCase {
     func testSearchForTweets() {
         let expectation = expectationWithDescription("Test Search Tweets")
         
-        TwitterJSON.searchForTweets("Apple", completion: { (tweets) -> Void in
-            XCTAssertEqual(tweets.count, 15)
+        TwitterJSON.searchForTweets("Apple") { (tweets) -> Void in
+            XCTAssertEqual(tweets.count, TwitterJSON.numberOfTweets)
             expectation.fulfill()
-        })
+        }
         
         waitForExpectationsWithTimeout(5, handler: { error in
             XCTAssertNil(error, "Error")
