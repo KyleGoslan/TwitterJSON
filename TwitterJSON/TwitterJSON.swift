@@ -80,7 +80,7 @@ public class TwitterJSON {
     Retweet a tweet.
     
     :param: Int The ID of the tweet to retweet.
-    :param: Completion Contains a sussess bool.
+    :param: Completion Contains a sussess bool. Success will be true if the user has already retweeted the tweet.
     */
     public class func retweet(tweetID: Int, completion: (success: Bool) -> Void) {
         let apiURL = "https://api.twitter.com/1.1/statuses/retweet/\(tweetID).json"
