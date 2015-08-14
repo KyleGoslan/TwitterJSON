@@ -1,35 +1,30 @@
 # TwitterJSON
 
 TwitterJSON makes it very easy to get up and running with the Twitter REST api on iOS devices. 
-You can start getting responses in just a few lines of code.
+You can start getting responses in just a few lines of code. It uses the account from the persons device to 
+authorize requests. 
 
 ## Example
 
-Set up your TJTweets object with your api and api secret keys from, for example:
+You can start getting results from Twitter with just one method call. For example, to get the main feed of the user: 
 
 ```swift
-	let apiKey = "123456789"
-    let apiSecret = "123456789"
-    let tjTweets = TJTweets(apiKey: apiKey, apiSecret: apiSecret)
+	TwitterJSON.getHomeFeed { (tweets) -> Void in
+            
+    }
 ``` 
 
-You can now ask for a response with simple method calls:
+All methods are class methods of the `TWitterJSON` class, so no need to initilize any objects. In the example above the
+completion handler contains an array of TJTweet objects. Each of which represent a tweet. You can now do what you want
+with this array of tweets, for example: 
 
 ```swift
-	tjTweets.getFavorites("KyleGoslan", completion: { tweets, error in
-    
-    })
-```
-
-Responses are handled in the methods completion handler. In the example above you get back an array of TJTweet objects (objects that hold information about a tweet). You can do whatever you want with this array, for example: 
-
-```swift
-	tjTweets.getFavorites("KyleGoslan", completion: { tweets, error in
+    TwitterJSON.getHomeFeed { (tweets) -> Void in
         for tweet in tweets {
             println(tweet.user.name)
             println(tweet.text)
         }
-    })
+    }
 ```
 
 Thats it!
@@ -59,35 +54,20 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-## Getting Twitter API Keys
-
-Since Twitter deprected v1.0 of their api **all** api calls need some form of authentication. To get 
-started with the TwitterJSON Framework you need to set up a Twitter app here:
-
-[https://apps.twitter.com](https://apps.twitter.com)
-
-Complete the form and under the 'Keys and Access Tokens' tab you'll find the two keys you need to
-get started with the TwitterJSON library. 
-
-* Consumer Key (API Key)
-* Consumer Secret (API Secret)
 
 ## Getting Tweets
 
-To get tweets you'll instanciate a new `TJTweets` object, passing in the two api keys documented above:
+The following methods get tweets, and will return an array of TJTweet objects.
 
-```swift
-    var tjTweets = TJTweets(apiKey: "xxx", apiSecret: "xxx")
+```Swift
+    TwitterJSON.getHomeFeed { (tweets) -> Void in
+        //Returns tweets from the users home feed. 
+    }
 ```
 
-Call the helper method which will return an array of `TJTweet` objects, for example:
-
-```swift 
-    tjTweets.getTimelineForUser("KyleGoslan" , completion: { tweets, error in
-        for tweet in tweets {
-            println(tweet.user.name)
-            println(tweet.text)
-        }
+```Swift
+    TwitterJSON.searchForTweets("Apple", completion: { (tweets) -> Void in
+        //Returns tweets containing the given search query.
     })
 ```
 
@@ -96,94 +76,31 @@ the infomation about the user who posted the tweet.
 
 ## Getting Users
 
-Getting users is very similier to getting tweets except you create a `TJUsers` object rather than a `TJTweets` object 
+The following methods get users, and will return an array of TJUser objects.
 
 ```swift
-    var tjUsers = TJUsers(apiKey: "xxx", apiSecret: "xxx")
-```
-
-Call the helper method to return the users you want, for example:
-
-```swift 
-    tjTweets.getFollowersForUser("KyleGoslan" , completion: { users, error in
-        for user in users {
-            println(user.name)
-            println(user.description)
-        }
+    TwitterJSON.getFollowersForUser("KyleGoslan", completion: { (users) -> Void in
+        //Returns a list of followers following the specified user.
     })
 ```
 
-## Images 
-    
-All TJUser objects come with the users profile image already downloaded. The download request is performed asynchronously whenever you do any request and is comepleted before the objects are returned, so are ready to use straight away in the completion block. Example:
+## Post Requests
+
+The following methods will post data to Twitter and return a bool value to represent success. 
 
 ```swift 
-    tjTweets.searchForTweets("weekend" , completion: { tweets, error in
-        self.myImageView.image = tweets[0].user.profileImage
-    })
-```
-Remembering to use `self` to access instance properties inside closures ;) 
-
-The decision to include profile images by defualt was taken because they are probably the most used images. Doing it this way makes your view update instantly as soon as the callback is recieved while the data consumption is still incredibly small. Typically a request containing 20 tweets is ~20kb of data. 
-
-## Error Handling
-
-Every method that you call to retrive data from Twitter has an optional `NSError` object with it. If the API request was successful then this will be `nil`. 
-
-The most basic error handling can be done like this: 
-
-```swift
-    tjUsers.getFollowersForUser("kylegoslan", completion: { users, error in
-        if error == nil {
-            //Do whater you want with users array. 
-        } else {
-            //Handle the error.
-        }
+    TwitterJSON.postTweet("Hello World", completion: { (success) -> Void in
+        //Will post the given string to twitter.
     })
 ```
 
-You coud simply alert the user that something went wrong, try again, or do nothing. However, TwitterJSON will try to give you a cause for the error, allowing you to take different action accordingly.
-
-### Specific Error Handling
-
-Typically there are three scenarios that can cause an error:
-
-- No data connection.
-- Invalid api requests.
-- Wrong api and api secret keys. 
-
-`NSError` objects typically have 'description' and 'code' properties. You can get more information about the error by printing them out: 
-
-```swift 
-    println(error.code)
-    println(error.description)
-```
-
-Not having a data connection is the only one that iOS really knows about. The other two causes come from the Twitters response to the API request. TwitterJSON will try and populate the error object with the appropriate informatiom. 
-
-- Error code: -1009
-    - No data connection.
-- Error code: 34
-    - Bad api request. For example the user could not be found. 
-- Error code: 99
-    - Bad authentication. Check your API and API secret keys. 
-
-Example showing a simple alert:
 ```swift
-    if error.code == 34 {
-        let myAlert = UIAlertView(title: "Sorry", message: "Could not find user.", delegate: nil, cancelButtonTitle: "Dismiss")
-        myAlert.show()
-    }
+    TwitterJSON.retweet(123456789, completion: { (success) -> Void in
+        //Will retweet the tweet with the given ID.
+    })
 ```
 
 ## Requirements
 
 - iOS 8.0+
-- Xcode 6.4
-
-## A Little More Info
-
-There are two types of objets you'll mainly instantiate, `TJTweets` and `TJUsers`.
-
-Simply put a `TJTweets` method calls will return and array of `TJTweet` objects, where as a `TJUsers` method calls will 
-return and array of `TJUser` objects. The difference being that if you're asking for an collection of tweets, all tweets inheritably must have a user, but if you were searching for a collection of users, then you wouldn't be expecting back any tweets.  
+- Xcode 6.4 
