@@ -7,170 +7,129 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
+import Accounts
+import Social
 
 /**
 All the real network requests are sent through this object.
-
-Uses the Alamofire library.
 */
 public class TwitterJSON {
     
     /**
-    Api key from Twitter.
-    */
-    public let apiKey: String!
+    Search for tweets.
     
-    /**
-    Api secret key from Twitter.
+    :param: String The search term to query.
+    :param: Completion Containts an array of TJTweet objects.
     */
-    public let apiSecret: String!
-    
-    /**
-    Initialize with api and api secret keys from Twitter.
-    */
-    public init(apiKey: String, apiSecret: String) {
-        self.apiKey = apiKey
-        self.apiSecret = apiSecret
+    public class func searchForTweets(query: String, completion: (tweets: [TJTweet]) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/search/tweets.json"
+        let parameters = [
+            "q" : query,
+        ]
+        TwitterJSON.makeRequest(.GET, parameters: parameters, apiURL: apiURL) { success, json in
+            var tweets = [TJTweet]()
+            for item in json["statuses"] {
+                let tweet = TJTweet(tweetInfo: item.1)
+                tweets.append(tweet)
+            }
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(tweets: tweets)
+            })
+        }
     }
     
-    class public func loadImage(imageURL: String?, intoView imageView: UIImageView, completion: ((error: NSError?) -> Void)?) {
-        if let imageURL = imageURL {
-            Alamofire.request(.GET, imageURL).response { request, response, data, error in
-                if error == nil {
-                    imageView.image = UIImage(data: data!, scale: 1)
-                    completion?(error: nil)
-                } else {
-                    completion?(error: error)
-                }
+    /**
+    Get the logged in users main feed.
+    
+    :param: Completion Containts an array of TJTweet objects.
+    */
+    public class func getHomeFeed(completion: (tweets: [TJTweet]) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+        TwitterJSON.makeRequest(.GET, parameters: nil, apiURL: apiURL) { success, json in
+            var tweets = [TJTweet]()
+            for item in json {
+                let tweet = TJTweet(tweetInfo: item.1)
+                tweets.append(tweet)
             }
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(tweets: tweets)
+            })
+        }
+    }
+    
+    /**
+    Create a new tweet.
+    
+    :param: String Text to post.
+    :param: Completion Contains a sussess bool.
+    */
+    public class func postTweet(text: String, completion: (success: Bool) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/statuses/update.json"
+        let parameters = [
+            "status" : text.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        ]
+        TwitterJSON.makeRequest(.POST, parameters: parameters, apiURL: apiURL) { success, _ in
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(success: success)
+            })
+        }
+    }
+    
+    /**
+    Retweet a tweet.
+    
+    :param: Int The ID of the tweet to retweet.
+    :param: Completion Contains a sussess bool.
+    */
+    public class func retweet(tweetID: Int, completion: (success: Bool) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/statuses/retweet/\(tweetID).json"
+        TwitterJSON.makeRequest(.POST, parameters: nil, apiURL: apiURL) { success, _ in
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(success: success)
+            })
         }
     }
 
     /**
-    Combines and encrypts the api key and the secret key and exchanges them for 
-    a bearer token via a network request.
+    Deals with the final request to the API.
     
-    :param: completion The code to be executed once the request has finished
+    :param: SLRequestMethod Will always be either .GET or .POST.
+    :param: Dictionary Parameters for the query. 
+    :param: Dictionary Parameters for the query.
+    :param: String The API url destination.
+    :param: Completion Handler for the request containing an error and or JSON.
     */
-    public func getBearerToken(completion: (bearerToken: String?, error: NSError?) -> Void) {
-        let bearerTokenCredentials = apiKey! + ":" + apiSecret!
-        let bearerTokenCredentialsData = (bearerTokenCredentials as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        let base64String = bearerTokenCredentialsData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
-        var loginRequest = NSMutableURLRequest(URL: NSURL(string:"https://api.twitter.com/oauth2/token?grant_type=client_credentials")!)
-        loginRequest.HTTPMethod = "POST"
-        loginRequest.addValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
-        loginRequest.addValue("text/plain", forHTTPHeaderField: "content-type")
+    private class func makeRequest(requestMethod: SLRequestMethod, parameters: [String : String]!, apiURL: String, completion: ((success: Bool, json: JSON) -> Void)) {
+        TwitterJSON.getAccount {(account: ACAccount?) -> Void in
+            if let _ = account {
+                let postRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: requestMethod, URL: NSURL(string: apiURL), parameters: parameters)
+                postRequest.account = account
+                postRequest.performRequestWithHandler({ (data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) -> Void in
+                    if error == nil {
+                        let json = JSON(data: data)
+                        completion(success: true, json: json)
+                    } else {
+                        completion(success: false, json: nil)
+                    }
+                })
+            }
+        }
+    }
+    
+    /**
+    Get the Twitter account configured in settings.
+    
+    :param: completion A closure which contains the first account.
+    */
+    private class func getAccount(completionHandler: (account: ACAccount?) -> Void) {
+        let accountStore = ACAccountStore()
+        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         
-        Alamofire.request(loginRequest).responseJSON { request, response, json, error in
-            if error == nil {
-                var json = JSON(json!)
-                if let accessToken = json["access_token"].string {
-                    completion(bearerToken:accessToken, error: nil)
-                } else {
-                    var dict = [String: String]()
-                    dict["Twitter Error"] = json["errors"][0]["message"].stringValue + " - " + json["errors"][0]["label"].stringValue
-                    let error = NSError(domain: "", code: json["errors"][0]["code"].intValue, userInfo: dict)
-                    completion(bearerToken:nil, error: error)
-                }
-            } else {
-                completion(bearerToken: nil, error: error)
-            }
-        }
-    }
-    
-    /**
-    Performs the network request to retrieve the json data from twitter.
-    
-    :param: String The complete REST api url
-    :param: String A valid bearer token
-    :param: completion The code to be executed once the request has finished
-    */
-    public func performDataRequestForURL(apiURL: String, completion: (data: JSON?, error: NSError?) -> Void) {
-        getBearerToken { (bearerToken, error) -> Void in
-            if error == nil {
-                if let bearerToken = bearerToken {
-                    var dataRequest = NSMutableURLRequest(URL: NSURL(string:apiURL)!)
-                    dataRequest.HTTPMethod = "GET"
-                    dataRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-                    Alamofire.request(dataRequest).responseJSON { request, response, json, error in
-                        if error == nil {
-                            var json = JSON(json!)
-                            if let error = json["errors"].array {
-                                var dict = [String: String]()
-                                dict["Twitter Error"] = json["errors"][0]["message"].stringValue + " - " + json["errors"][0]["label"].stringValue
-                                let error = NSError(domain: "", code: json["errors"][0]["code"].intValue, userInfo: dict)
-                                completion(data:nil, error: error)
-                            } else {
-                                completion(data: json, error: error)
-                            }
-                        } else {
-                            completion(data: nil, error: error)
-                        }
-                    }
-                }
-            } else {
-                completion(data: nil, error: error)
-            }
-        }
-    }
-    
-    /**
-    Downloads all the user profile images for TJUser objects
-    
-    :param: Array Optional array of TJTweet objects
-    :param: Array Optional array of TJUser objects
-    :param: Completion Code to execuse on completion of the downloads
-    */
-    public func loadImages(tweets: [TJTweet]?, users: [TJUser]?, completion: (tweets: [TJTweet]?, users: [TJUser]?) -> Void) {
-        var i = 0
-        if let tweets = tweets {
-            for tweet in tweets {
-                Alamofire.request(.GET, tweet.user.profileImageURL).response { (request, response, data, error) in
-                    tweet.user.profileImage = UIImage(data: data!, scale:1)
-                    i++
-                    if i == tweets.count {
-                        completion(tweets: tweets, users: nil)
-                    }
-                }
-            }
-        }
-        if let users = users {
-            for user in users {
-                Alamofire.request(.GET, user.profileImageURL).response { (request, response, data, error) in
-                    user.profileImage = UIImage(data: data!, scale:1)
-                    i++
-                    if i == users.count {
-                        completion(tweets: nil, users: users)
-                    }
-                }
-            }
-        }
-    }
-    
-    /**
-    Print out the apps data rate limit statistics from Twitter. Prints as pure JSON.
-    */
-    public func printRateLimit() {
-        getBearerToken { (bearerToken, error) -> Void in
-            if error == nil {
-                if let bearerToken = bearerToken {
-                    let apiURL = "https://api.twitter.com/1.1/application/rate_limit_status.json"
-                    var dataRequest = NSMutableURLRequest(URL: NSURL(string:apiURL)!)
-                    dataRequest.HTTPMethod = "GET"
-                    dataRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-                    Alamofire.request(dataRequest).responseJSON { request, response, json, error in
-                        if error == nil {
-                            var json = JSON(json!)
-                            println(json)
-                        } else {
-                            println("Couldn't get rate limit.")
-                        }
-                    }
-                }
-            } else {
-                println("Couldn't get rate limit.")
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted: Bool, error: NSError!) -> Void in
+            if granted {
+            let accounts: [ACAccount] = accountStore.accountsWithAccountType(accountType) as! [ACAccount]
+            completionHandler(account: accounts.first!)
             }
         }
     }

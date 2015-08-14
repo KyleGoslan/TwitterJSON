@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 s.platform = :ios
 s.ios.deployment_target = '8.0'
 s.name = "TwitterJSON"
-s.summary = "Simple integration with Twitter RESE api."
+s.summary = "Simple integration with Twitter REST api."
 s.requires_arc = true
 
 s.version = "0.2.3"
