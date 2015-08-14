@@ -31,8 +31,10 @@ extension TwitterJSON {
                 let user = TJUser(userInfo: item.1)
                 users.append(user)
             }
-            dispatch_async(dispatch_get_main_queue(),{
-                completion(users: users)
+            TwitterJSON.loadImages(nil, users: users, completion: { (tweets, users) -> Void in
+                dispatch_async(dispatch_get_main_queue(),{
+                    completion(users: users!)
+                })
             })
         }
     }

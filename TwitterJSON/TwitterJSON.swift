@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 import Accounts
 import Social
 
@@ -62,4 +63,33 @@ public class TwitterJSON {
             }
         }
     }
+    
+    internal class func loadImages(tweets: [TJTweet]?, users: [TJUser]?, completion: (tweets: [TJTweet]?, users: [TJUser]?) -> Void) {
+        var i = 0
+        
+        if let tweets = tweets {
+            for tweet in tweets {
+                Alamofire.request(.GET, tweet.user.profileImageURL).response { (request, response, data, error) in
+                    tweet.user.profileImage = UIImage(data: data!, scale:1)
+                    i++
+                    if i == tweets.count {
+                        completion(tweets: tweets, users: nil)
+                    }
+                }
+            }
+        }
+        
+        if let users = users {
+            for user in users {
+                Alamofire.request(.GET, user.profileImageURL).response { (request, response, data, error) in
+                    user.profileImage = UIImage(data: data!, scale:1)
+                    i++
+                    if i == users.count {
+                        completion(tweets: nil, users: users)
+                    }
+                }
+            }
+        }
+    }
+    
 }

@@ -31,8 +31,10 @@ extension TwitterJSON {
                 let tweet = TJTweet(tweetInfo: item.1)
                 tweets.append(tweet)
             }
-            dispatch_async(dispatch_get_main_queue(),{
-                completion(tweets: tweets)
+            TwitterJSON.loadImages(tweets, users: nil, completion: { (tweets, users) -> Void in
+                dispatch_async(dispatch_get_main_queue(),{
+                    completion(tweets: tweets!)
+                })
             })
         }
     }
@@ -53,8 +55,10 @@ extension TwitterJSON {
                 let tweet = TJTweet(tweetInfo: item.1)
                 tweets.append(tweet)
             }
-            dispatch_async(dispatch_get_main_queue(),{
-                completion(tweets: tweets)
+            TwitterJSON.loadImages(tweets, users: nil, completion: { (tweets, users) -> Void in
+                dispatch_async(dispatch_get_main_queue(),{
+                    completion(tweets: tweets!)
+                })
             })
         }
     }

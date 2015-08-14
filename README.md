@@ -36,24 +36,33 @@ Thats it!
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. CocoaPods 0.36 adds   supports for Swift and embedded frameworks. You can install it with the following command:
 
 ```bash
-$ gem install cocoapods
+    $ gem install cocoapods
 ```
 
 To integrate TwitterJSON into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
+    source 'https://github.com/CocoaPods/Specs.git'
+    platform :ios, '8.0'
+    use_frameworks!
 
-pod 'TwitterJSON'
+    pod 'TwitterJSON'
 ```
 
 Then, run the following command:
 
 ```bash
-$ pod install
+    $ pod install
 ```
+## Number of Results
+
+By default all requests that return an array of either tweets or users will return 20 results. This is defined as a static class variable, meaning that when you set it it will remain at that until it is later changed. To change the number of results:
+
+```swift 
+    TwitterJSON.numberOfResults = 5 
+```
+
+**Note:** Twitters REST API requests have limits.
 
 ## Getting Tweets
 
