@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		276831AD1B7E257700C73FFE /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276831AC1B7E257700C73FFE /* Posts.swift */; };
 		2777D5801B705156003EF2FF /* TwitterJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FA62321B70370400467C8A /* TwitterJSON.swift */; };
 		2777D5821B70CF2A003EF2FF /* TJUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777D5811B70CF2A003EF2FF /* TJUtils.swift */; };
+		27AC023E1B7E4F2B0055A403 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276831AC1B7E257700C73FFE /* Posts.swift */; };
+		27AC02401B7E50860055A403 /* GetTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC023F1B7E50860055A403 /* GetTweets.swift */; };
+		27AC02411B7E50860055A403 /* GetTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC023F1B7E50860055A403 /* GetTweets.swift */; };
+		27AC02431B7E50D50055A403 /* GetUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC02421B7E50D50055A403 /* GetUsers.swift */; };
+		27AC02441B7E50D50055A403 /* GetUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC02421B7E50D50055A403 /* GetUsers.swift */; };
 		27AC43431B70D2950078CF0F /* TJUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2777D5811B70CF2A003EF2FF /* TJUtils.swift */; };
-		27AC43451B70E92F0078CF0F /* TJTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43441B70E92F0078CF0F /* TJTweets.swift */; };
-		27AC43481B70E96E0078CF0F /* TJTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43441B70E92F0078CF0F /* TJTweets.swift */; };
-		27AC434A1B70F55C0078CF0F /* TJTweetsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC43491B70F55C0078CF0F /* TJTweetsTest.swift */; };
 		27AC434C1B70FC0D0078CF0F /* TJTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC434B1B70FC0D0078CF0F /* TJTweet.swift */; };
 		27AC434D1B70FDE00078CF0F /* TJTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC434B1B70FC0D0078CF0F /* TJTweet.swift */; };
 		27AC434F1B7109610078CF0F /* TJUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC434E1B7109610078CF0F /* TJUser.swift */; };
 		27AC43511B71099C0078CF0F /* TJUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AC434E1B7109610078CF0F /* TJUser.swift */; };
-		27D5EE7E1B71744C0039AF7E /* TJUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5EE7D1B71744C0039AF7E /* TJUsers.swift */; };
-		27D5EE801B7258B40039AF7E /* TJUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5EE7F1B7258B40039AF7E /* TJUsersTests.swift */; };
-		27D5EE811B7258FB0039AF7E /* TJUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D5EE7D1B71744C0039AF7E /* TJUsers.swift */; };
 		27FA621C1B70358000467C8A /* TwitterJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FA621B1B70358000467C8A /* TwitterJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27FA62221B70358000467C8A /* TwitterJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FA62161B70358000467C8A /* TwitterJSON.framework */; };
 		27FA62291B70358000467C8A /* TwitterJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FA62281B70358000467C8A /* TwitterJSONTests.swift */; };
@@ -38,13 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		276831AC1B7E257700C73FFE /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		2777D5811B70CF2A003EF2FF /* TJUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJUtils.swift; sourceTree = "<group>"; };
-		27AC43441B70E92F0078CF0F /* TJTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJTweets.swift; sourceTree = "<group>"; };
-		27AC43491B70F55C0078CF0F /* TJTweetsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJTweetsTest.swift; sourceTree = "<group>"; };
+		27AC023F1B7E50860055A403 /* GetTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTweets.swift; sourceTree = "<group>"; };
+		27AC02421B7E50D50055A403 /* GetUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUsers.swift; sourceTree = "<group>"; };
 		27AC434B1B70FC0D0078CF0F /* TJTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJTweet.swift; sourceTree = "<group>"; };
 		27AC434E1B7109610078CF0F /* TJUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJUser.swift; sourceTree = "<group>"; };
-		27D5EE7D1B71744C0039AF7E /* TJUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJUsers.swift; sourceTree = "<group>"; };
-		27D5EE7F1B7258B40039AF7E /* TJUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TJUsersTests.swift; sourceTree = "<group>"; };
 		27FA62161B70358000467C8A /* TwitterJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TwitterJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FA621A1B70358000467C8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27FA621B1B70358000467C8A /* TwitterJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterJSON.h; sourceTree = "<group>"; };
@@ -111,8 +110,9 @@
 			children = (
 				27FA621B1B70358000467C8A /* TwitterJSON.h */,
 				27FA62321B70370400467C8A /* TwitterJSON.swift */,
-				27AC43441B70E92F0078CF0F /* TJTweets.swift */,
-				27D5EE7D1B71744C0039AF7E /* TJUsers.swift */,
+				27AC023F1B7E50860055A403 /* GetTweets.swift */,
+				27AC02421B7E50D50055A403 /* GetUsers.swift */,
+				276831AC1B7E257700C73FFE /* Posts.swift */,
 				2777D5811B70CF2A003EF2FF /* TJUtils.swift */,
 				27AC43501B71096D0078CF0F /* Tweet Objects */,
 				27FA62191B70358000467C8A /* Supporting Files */,
@@ -131,8 +131,6 @@
 		27FA62251B70358000467C8A /* TwitterJSONTests */ = {
 			isa = PBXGroup;
 			children = (
-				27AC43491B70F55C0078CF0F /* TJTweetsTest.swift */,
-				27D5EE7F1B7258B40039AF7E /* TJUsersTests.swift */,
 				27FA62281B70358000467C8A /* TwitterJSONTests.swift */,
 				27FA62261B70358000467C8A /* Supporting Files */,
 			);
@@ -306,12 +304,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27D5EE7E1B71744C0039AF7E /* TJUsers.swift in Sources */,
-				27AC43451B70E92F0078CF0F /* TJTweets.swift in Sources */,
 				27FA62331B70370400467C8A /* TwitterJSON.swift in Sources */,
 				2777D5821B70CF2A003EF2FF /* TJUtils.swift in Sources */,
+				27AC02401B7E50860055A403 /* GetTweets.swift in Sources */,
 				27AC434F1B7109610078CF0F /* TJUser.swift in Sources */,
 				27AC434C1B70FC0D0078CF0F /* TJTweet.swift in Sources */,
+				276831AD1B7E257700C73FFE /* Posts.swift in Sources */,
+				27AC02431B7E50D50055A403 /* GetUsers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,14 +318,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27D5EE811B7258FB0039AF7E /* TJUsers.swift in Sources */,
-				27D5EE801B7258B40039AF7E /* TJUsersTests.swift in Sources */,
 				27FA62291B70358000467C8A /* TwitterJSONTests.swift in Sources */,
+				27AC023E1B7E4F2B0055A403 /* Posts.swift in Sources */,
 				27AC43431B70D2950078CF0F /* TJUtils.swift in Sources */,
-				27AC434A1B70F55C0078CF0F /* TJTweetsTest.swift in Sources */,
+				27AC02441B7E50D50055A403 /* GetUsers.swift in Sources */,
 				27AC43511B71099C0078CF0F /* TJUser.swift in Sources */,
+				27AC02411B7E50860055A403 /* GetTweets.swift in Sources */,
 				27AC434D1B70FDE00078CF0F /* TJTweet.swift in Sources */,
-				27AC43481B70E96E0078CF0F /* TJTweets.swift in Sources */,
 				2777D5801B705156003EF2FF /* TwitterJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

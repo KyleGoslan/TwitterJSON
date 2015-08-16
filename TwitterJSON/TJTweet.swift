@@ -27,6 +27,11 @@ public class TJTweet {
     public var text: String!
     
     /**
+    The ID of the tweet
+    */
+    public var id: Int!
+    
+    /**
     How many times the tweet has been favorited
     */
     public var favoriteCount: Int!
@@ -57,6 +62,10 @@ public class TJTweet {
     The init method parses the json and sets the objets properties.
     */
     init(tweetInfo: JSON) {
+        
+        if let id = tweetInfo["id"].int {
+            self.id = id
+        }
         
         if let user = tweetInfo["user"].dictionary {
             self.user = TJUser(userInfo: tweetInfo["user"])
