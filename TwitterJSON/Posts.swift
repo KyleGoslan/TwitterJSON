@@ -29,6 +29,21 @@ public extension TwitterJSON {
     }
     
     /**
+    Retweet a tweet.
+    
+    :param: Int The ID of the tweet to retweet.
+    :param: Completion Contains a sussess bool. Success will be true if the user has already retweeted the tweet.
+    */
+    public class func favoriteTweet(tweetID: Int, completion: (success: Bool) -> Void) {
+        let apiURL = "https://api.twitter.com/1.1/favorites/create.json?id=\(tweetID)"
+        TwitterJSON.makeRequest(.POST, parameters: nil, apiURL: apiURL) { success, _ in
+            dispatch_async(dispatch_get_main_queue(),{
+                completion(success: success)
+            })
+        }
+    }
+    
+    /**
     Create a new tweet.
     
     :param: String Text to post.
@@ -45,5 +60,7 @@ public extension TwitterJSON {
             })
         }
     }
+    
+    
     
 }

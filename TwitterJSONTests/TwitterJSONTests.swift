@@ -43,6 +43,19 @@ class TwitterJSONTests: XCTestCase {
         })
     }
     
+    func testFavorite() {
+        let expectation = expectationWithDescription("Test Favorite")
+        
+        TwitterJSON.favoriteTweet(632158353607802880, completion: { (success) -> Void in
+            XCTAssertTrue(success)
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
     func testPostTweet() {
         let expectation = expectationWithDescription("Test Post Tweet")
         
@@ -73,6 +86,19 @@ class TwitterJSONTests: XCTestCase {
         let expectation = expectationWithDescription("Test User Followers")
         
         TwitterJSON.getFollowersForUser("KyleGoslan", completion: { (users) -> Void in
+            XCTAssertEqual(users.count, TwitterJSON.numberOfResults)
+            expectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
+    func testGetFollowing() {
+        let expectation = expectationWithDescription("Get Following")
+        
+        TwitterJSON.getFollowingForUser("KyleGoslan", completion: { (users) -> Void in
             XCTAssertEqual(users.count, TwitterJSON.numberOfResults)
             expectation.fulfill()
         })
