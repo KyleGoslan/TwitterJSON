@@ -17,7 +17,15 @@ All the real network requests are sent through this object.
 */
 public class TwitterJSON {
     
+    /**
+    Nuber of results to return.
+    */
     public static var numberOfResults = 20
+    
+    /**
+    Needed to feedback alerts to the user.
+    */
+    public static var viewController: UIViewController?
 
     /**
     Deals with the final request to the API.
@@ -58,12 +66,38 @@ public class TwitterJSON {
         
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted: Bool, error: NSError!) -> Void in
             if granted {
-            let accounts: [ACAccount] = accountStore.accountsWithAccountType(accountType) as! [ACAccount]
-            completionHandler(account: accounts.first!)
+                let accounts: [ACAccount] = accountStore.accountsWithAccountType(accountType) as! [ACAccount]
+                if accounts.count == 1 {
+                    completionHandler(account: accounts.first!)
+                } else {
+                    let alertController = UIAlertController(title: "Select an account", message: nil, preferredStyle: .Alert)
+                    for account in accounts {
+                        let alertAction = UIAlertAction(title: account.username, style: .Default) { (alertAction: UIAlertAction!) -> Void in
+                            completionHandler(account: account)
+                            println("test")
+                        }
+                        alertController.addAction(alertAction)
+                    }
+                    TwitterJSON.viewController?.presentViewController(alertController, animated: true, completion: nil)
+                }
+            } else {
+                let title = "Grant Access To Twitter"
+                let message = "You need to give permission for this application to use your Twitter account. Manage in Settings."
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                let action = UIAlertAction(title: "Okay", style: .Default, handler: nil)
+                alertController.addAction(action)
+                TwitterJSON.viewController?.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
     
+    /**
+    Loads profile images of users.
+    
+    :param: Optional Array of TJTweet objects.
+    :param: Optional Array of TJUser objects.
+    :param: Completion Returns the arry of objects passed in with the images loaded.
+    */
     internal class func loadImages(tweets: [TJTweet]?, users: [TJUser]?, completion: (tweets: [TJTweet]?, users: [TJUser]?) -> Void) {
         var i = 0
         

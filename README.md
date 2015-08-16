@@ -93,6 +93,12 @@ The following methods get users, and will return an array of TJUser objects.
     })
 ```
 
+```swift
+    TwitterJSON.getFollowingForUser("KyleGoslan", completion: { (users) -> Void in
+        //Returns a list of people the specified user is following.
+    })
+```
+
 ## Post Requests
 
 The following methods will post data to Twitter and return a bool value to represent success. 
@@ -106,6 +112,12 @@ The following methods will post data to Twitter and return a bool value to repre
 ```swift
     TwitterJSON.retweet(123456789, completion: { (success) -> Void in
         //Will retweet the tweet with the given ID.
+    })
+```
+
+```swift
+    TwitterJSON.favoriteTweet(123456789, completion: { (success) -> Void in
+        //Will favorite the tweet with the given ID.
     })
 ```
 
