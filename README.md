@@ -54,6 +54,15 @@ Then, run the following command:
 ```bash
     $ pod install
 ```
+
+## Setting a ViewController
+
+You should set the view controller of TwitterJSON to whatver view controller is active. This is needed to show alerts to the user. For exmple, if they have disallowed access to Twitter from your app in settings, or they have more than one account setup:
+
+```swift
+    TwitterJSON.viewController = self
+```
+
 ## Number of Results
 
 By default all requests that return an array of either tweets or users will return 20 results. This is defined as a static class variable, meaning that when you set it it will remain at that until it is later changed. To change the number of results:
@@ -120,6 +129,19 @@ The following methods will post data to Twitter and return a bool value to repre
         //Will favorite the tweet with the given ID.
     })
 ```
+
+## Images 
+    
+All TJUser objects come with the users profile image already downloaded. The download request is performed asynchronously whenever you do any request and is comepleted before the objects are returned, so are ready to use straight away in the completion block. Example:
+
+```swift 
+    tjTweets.searchForTweets("weekend" , completion: { tweets, error in
+        self.myImageView.image = tweets[0].user.profileImage
+    })
+```
+Remembering to use `self` to access instance properties inside closures ;) 
+
+The decision to include profile images by defualt was taken because they are probably the most used images. Doing it this way makes your view update instantly as soon as the callback is recieved while the data consumption is still incredibly small. Typically a request containing 20 tweets is ~20kb of data. 
 
 ## Requirements
 

@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 #### Changed
 #### Added
 
+## [1.0.0](https://github.com/KyleGoslan/TwitterJSON/releases/tag/1.0.0)
+Released on 2015-16-09.
+- Extensive rewrite. Old implementation deprecated, see docs. 
+    - Changed by [Kyle Goslan](https://github.com/KyleGoslan).
+
+
 ## [0.2.3](https://github.com/KyleGoslan/TwitterJSON/releases/tag/0.2.3)
 Released on 2015-12-09.
 
