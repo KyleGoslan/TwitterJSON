@@ -4,6 +4,8 @@ TwitterJSON makes it very easy to get up and running with the Twitter REST api o
 You can start getting responses in just a few lines of code. It uses the account from the persons device to 
 authorize requests. 
 
+[Video Demo/Tutorial](https://www.youtube.com/watch?v=cXkO4Jt9zF4)
+
 ## Example
 
 You can start getting results from Twitter with just one method call. For example, to get the main feed of the user: 
@@ -135,11 +137,8 @@ The following methods will post data to Twitter and return a bool value to repre
 All TJUser objects come with the users profile image already downloaded. The download request is performed asynchronously whenever you do any request and is comepleted before the objects are returned, so are ready to use straight away in the completion block. Example:
 
 ```swift 
-    tjTweets.searchForTweets("weekend" , completion: { tweets, error in
-        self.myImageView.image = tweets[0].user.profileImage
-    })
+    image.image = tweet.user.profileImage
 ```
-Remembering to use `self` to access instance properties inside closures ;) 
 
 The decision to include profile images by defualt was taken because they are probably the most used images. Doing it this way makes your view update instantly as soon as the callback is recieved while the data consumption is still incredibly small. Typically a request containing 20 tweets is ~20kb of data. 
 
