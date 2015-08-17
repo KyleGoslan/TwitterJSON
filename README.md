@@ -4,6 +4,8 @@ TwitterJSON makes it very easy to get up and running with the Twitter REST api o
 You can start getting responses in just a few lines of code. It uses the account from the persons device to 
 authorize requests. 
 
+[Video Demo/Tutorial](https://www.youtube.com/watch?v=cXkO4Jt9zF4)
+
 ## Example
 
 You can start getting results from Twitter with just one method call. For example, to get the main feed of the user: 
